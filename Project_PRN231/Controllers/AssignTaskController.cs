@@ -31,7 +31,7 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> GetAssignTaskById(int Id)
         {
             AssignTask aT = null;
@@ -44,24 +44,37 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> AddAssignTask(AssignTask assignTask)
+        //[Authorize]
+        public async Task<IActionResult> AddAssignTask(AssignTask asTask)
         {
-            return Ok();
+            assignTask.InsertAssignTask(asTask);
+            return Ok("Insert Successfull!!!");
         }
 
         [HttpPut]
-        [Authorize]
-        public async Task<IActionResult> UpdateAssignTask(AssignTask assignTask)
+        //[Authorize]
+        public async Task<IActionResult> UpdateAssignTask(AssignTask asTask)
         {
-            return Ok();
+            var aT = assignTask.GetAssignTaskById(asTask.Id);
+            if (aT == null)
+            {
+                return NotFound();
+            } 
+            assignTask.UpdateAssignTask(asTask);
+            return Ok("Update Successfull!!!");
         }
 
         [HttpDelete]
-        [Authorize]
-        public async Task<IActionResult> DeleteAssignTask()
+        //[Authorize]
+        public async Task<IActionResult> DeleteAssignTask(AssignTask asTask)
         {
-            return Ok();
+            var aT = assignTask.GetAssignTaskById(asTask.Id);
+            if (aT == null)
+            {
+                return NotFound();
+            }
+            assignTask.DeleteAssignTask(asTask);
+            return Ok("Delete Successfull!!!");
         }
 
     }

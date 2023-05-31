@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "U3ayihaharkWygG6qK4ds8U5pcj/wwiq4M/mGUJ01LVpGEAhXCpUKprQPKn+HpYEbNrpSYqONDwPPSq10q1SmQ==",
+  "dgSpecHash": "mAmx0xny9kgtjBHSuQAFDQBmduCVUvUQjixRUwGcTZtPz1B451Lrjg1NueI+6JqLJe4JCN0x4S5dV8RzjP9uvQ==",
   "success": true,
-  "projectFilePath": "E:\\Visual Studio 2019\\Project_PRN231\\Project_PRN231\\Project_PRN231.csproj",
+  "projectFilePath": "E:\\Visual Studio 2019\\Project_PRN231\\PRN231_ProjectBE\\Project_PRN231\\Project_PRN231.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
