@@ -5,7 +5,7 @@ namespace Project_PRN231.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class GenreController : ControllerBase
     {
     }
 }
