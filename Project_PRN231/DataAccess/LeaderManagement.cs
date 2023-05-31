@@ -1,4 +1,5 @@
-﻿using Project_PRN231.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Project_PRN231.Models;
 
 namespace Project_PRN231.DataAccess
 {
@@ -28,7 +29,8 @@ namespace Project_PRN231.DataAccess
             try
             {
                 var db = new PRN231_SUContext();
-                list = db.AssignTasks.ToList();
+                //list = db.AssignTasks.ToList();
+                list = db.AssignTasks.Include(x => x.Leader).Include(x => x.Reporter).Include(x => x.Writer).Include(x => x).ToList();
             }
             catch (Exception ex)
             {
@@ -43,7 +45,7 @@ namespace Project_PRN231.DataAccess
             try
             {
                 var db = new PRN231_SUContext();
-                rp = db.AssignTasks.SingleOrDefault(x => x.Id == taskID);
+                rp = db.AssignTasks.Include(x => x.Leader).Include(x => x.Reporter).Include(x => x.Writer).Include(x => x).SingleOrDefault(x => x.Id == taskID);
             }
             catch (Exception ex)
             {
