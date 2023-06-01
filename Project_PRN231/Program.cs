@@ -24,9 +24,17 @@ builder.Services.AddScoped<PRN231_SUContext>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 // DI
-builder.Services.AddScoped< IWriterRepository, WriterRepository>();
+builder.Services.AddScoped<IWriterRepository, WriterRepository>();
 builder.Services.AddScoped<ILeaderReporitory, LeaderRepository>();
 builder.Services.AddScoped<IReporterRepository, ReporterRepository>();
+builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddCors(c =>
+{
+    c.AddPolicy("AllowOrigin", option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+});
+
 
 var app = builder.Build();
 
@@ -36,6 +44,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.UseHttpsRedirection();
 
