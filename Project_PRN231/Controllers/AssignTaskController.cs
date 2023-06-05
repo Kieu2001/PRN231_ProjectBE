@@ -52,6 +52,28 @@ namespace Project_PRN231.Controllers
             return Ok(_mapper.Map<AssignTaskDTO>(aT));
         }
 
+        [HttpGet]
+        public IActionResult GetAssignTaskByReporterId(int reportId)
+        {
+            var lstAssignForRepoter = db.AssignTasks.Where(x => x.ReporterId == reportId).ToList();
+            if (lstAssignForRepoter.Count == 0) 
+            {
+                return NotFound();  
+            }
+            return Ok(lstAssignForRepoter);
+        }
+
+        [HttpGet]
+        public IActionResult GetAllAssignTaskByWriterId(int writerId)
+        {
+            var lstAssignForWriter = db.AssignTasks.Where(x => x.WriterId == writerId).ToList();
+            if (lstAssignForWriter.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(lstAssignForWriter);
+        }
+
         [HttpPost]
         //[Authorize]
         public async Task<IActionResult> AddAssignTask(AssignTask asTask)
