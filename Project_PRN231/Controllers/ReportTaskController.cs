@@ -81,6 +81,23 @@ namespace Project_PRN231.Controllers
             return File(fileBytes, contentType, document.FileName);
         }
 
+        [HttpGet]
+        public IActionResult getDocumentById(int Id)
+        {
+            var lstDoc = db.Documents.Where(x => x.TaskId == Id).ToList();
+            if (lstDoc.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(lstDoc);
+        }
+
+        [HttpGet]
+        public IActionResult getAllReporttask()
+        {
+            var listReportTask
+            return Ok();
+        }
 
 
         //[HttpPost]
