@@ -78,10 +78,6 @@ namespace Project_PRN231.Controllers
             }
             writerRepository.DeleteWritingTask(writingTask);
             return Ok("Delete Successfull!!!");
-        }
-
-
-
-        
+        }   
     }
 }

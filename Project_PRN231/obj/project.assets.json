@@ -2814,19 +2814,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Desktop\\2.1\\PRN231_ProjectBE\\Project_PRN231\\Project_PRN231.csproj",
+      "projectUniqueName": "E:\\Visual Studio 2019\\Project_PRN231\\PRN231_ProjectBE\\Project_PRN231\\Project_PRN231.csproj",
       "projectName": "Project_PRN231",
-      "projectPath": "C:\\Users\\User\\Desktop\\2.1\\PRN231_ProjectBE\\Project_PRN231\\Project_PRN231.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Desktop\\2.1\\PRN231_ProjectBE\\Project_PRN231\\obj\\",
+      "projectPath": "E:\\Visual Studio 2019\\Project_PRN231\\PRN231_ProjectBE\\Project_PRN231\\Project_PRN231.csproj",
+      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+      "outputPath": "E:\\Visual Studio 2019\\Project_PRN231\\PRN231_ProjectBE\\Project_PRN231\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
