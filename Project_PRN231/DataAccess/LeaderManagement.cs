@@ -30,7 +30,7 @@ namespace Project_PRN231.DataAccess
             {
                 var db = new PRN231_SUContext();
                 //list = db.AssignTasks.ToList();
-                list = db.AssignTasks.ToList();
+                list = db.AssignTasks.Include(x => x.Leader).Include(x => x.Reporter).Include(x => x.Writer).ToList();
             }
             catch (Exception ex)
             {
