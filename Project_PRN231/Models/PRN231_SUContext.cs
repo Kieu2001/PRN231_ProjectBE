@@ -19,6 +19,7 @@ namespace Project_PRN231.Models
         public virtual DbSet<AssignTask> AssignTasks { get; set; } = null!;
         public virtual DbSet<CategoriesNewsSeen> CategoriesNewsSeens { get; set; } = null!;
         public virtual DbSet<Comment> Comments { get; set; } = null!;
+        public virtual DbSet<Document> Documents { get; set; } = null!;
         public virtual DbSet<Genre> Genres { get; set; } = null!;
         public virtual DbSet<News> News { get; set; } = null!;
         public virtual DbSet<NewsSeen> NewsSeens { get; set; } = null!;
@@ -110,6 +111,20 @@ namespace Project_PRN231.Models
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK__Comment__User_Id__5535A963");
+            });
+
+            modelBuilder.Entity<Document>(entity =>
+            {
+                entity.ToTable("Document");
+
+                entity.Property(e => e.ContentType).HasMaxLength(1000);
+
+                entity.Property(e => e.FileName).HasMaxLength(1000);
+
+                entity.HasOne(d => d.Task)
+                    .WithMany(p => p.Documents)
+                    .HasForeignKey(d => d.TaskId)
+                    .HasConstraintName("FK__Document__TaskId__71D1E811");
             });
 
             modelBuilder.Entity<Genre>(entity =>
