@@ -83,7 +83,9 @@ namespace Project_PRN231.DataAccess
                 if (rp != null)
                 {
                     var db = new PRN231_SUContext();
-                    db.Entry<Genre>(genre).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    rp.GenreName = genre.GenreName;
+                    rp.Description = genre.Description;
+                    db.Entry<Genre>(rp).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     db.SaveChanges();
                 }
                 else
@@ -97,15 +99,15 @@ namespace Project_PRN231.DataAccess
             }
         }
 
-        public void Delete(Genre genre)
+        public void Delete(int genreId)
         {
             try
             {
-                Genre rp = GetGenreById(genre.Id);
+                Genre rp = GetGenreById(genreId);
                 if (rp != null)
                 {
                     var db = new PRN231_SUContext();
-                    db.Genres.Remove(genre);
+                    db.Genres.Remove(rp);
                     db.SaveChanges();
                 }
                 else

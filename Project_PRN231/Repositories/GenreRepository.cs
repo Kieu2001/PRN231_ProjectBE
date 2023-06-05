@@ -6,7 +6,7 @@ namespace Project_PRN231.Repositories
 {
     public class GenreRepository : IGenreRepository
     {
-        public void DeleteGenre(Genre genre) => GenreManagement.Instance.Delete(genre);
+        public void DeleteGenre(int genreId) => GenreManagement.Instance.Delete(genreId);
 
         public IEnumerable<Genre> GetAllGenre() => GenreManagement.Instance.GetGenreList();
 

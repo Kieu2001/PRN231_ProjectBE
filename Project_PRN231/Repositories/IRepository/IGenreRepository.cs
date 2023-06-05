@@ -8,6 +8,6 @@ namespace Project_PRN231.Repositories.IRepository
         Genre GetGenreById(int Id);
         void InsertGenre(Genre genre);
         void UpdateGenre(Genre genre);
-        void DeleteGenre(Genre genre);
+        void DeleteGenre(int genreId);
     }
 }

@@ -45,15 +45,15 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpDelete]
-        public IActionResult DeleteGenre(Genre genre)
+        public IActionResult DeleteGenre(int genreId)
         {
-            var g = gen.GetGenreById(genre.Id);
+            var g = gen.GetGenreById(genreId);
             if (g == null)
             {
                 return NotFound();
             }
-            gen.DeleteGenre(genre);
-            return Ok();
+            gen.DeleteGenre(genreId);
+            return Ok("Delete Successfull!!!");
         }
     }
 }

@@ -13,11 +13,13 @@ namespace Project_PRN231.Controllers
     public class AssignTaskController : ControllerBase
     {
         private readonly ILeaderReporitory assignTask;
+        private readonly IUserRepository userRepo;
         private readonly IMapper _mapper;
 
-        public AssignTaskController(ILeaderReporitory trackRepository, IMapper mapper)
+        public AssignTaskController(ILeaderReporitory trackRepository, IUserRepository a, IMapper mapper)
         {
             assignTask = trackRepository;
+            userRepo = a;
             _mapper = mapper;
         }
 
@@ -27,7 +29,31 @@ namespace Project_PRN231.Controllers
         {
             IEnumerable<AssignTask> lstAssignTask = new List<AssignTask>();
             lstAssignTask = assignTask.GetAllAssignTask();
-            return Ok(_mapper.Map<List<AssignTaskDTO>>(lstAssignTask));
+            IEnumerable<User> lstUser = new List<User>();
+            lstUser = userRepo.GetAllUser();
+
+            foreach (var item in lstAssignTask)
+            {
+                foreach (var i in lstUser)
+                {
+                    if (item.WriterId == i.Id)
+                    {
+                        item.Writer = i;
+                    }
+
+                    if (item.ReporterId == i.Id)
+                    {
+                        item.Reporter = i;
+                    }
+
+                    if (item.LeaderId == i.Id)
+                    {
+                        item.Leader = i;
+                    }
+                }
+            }
+
+            return Ok(lstAssignTask);
         }
 
         [HttpGet]
@@ -40,6 +66,10 @@ namespace Project_PRN231.Controllers
             {
                 return NotFound();
             }
+
+           
+            
+
             return Ok(_mapper.Map<AssignTaskDTO>(aT));
         }
 
