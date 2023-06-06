@@ -93,10 +93,56 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpGet]
-        public IActionResult getAllReporttask()
+        public IActionResult GetAllReportTask()
         {
-            var listReportTask
-            return Ok();
+            var listReportTask = reporterRepository.GetAllTask();
+            if (listReportTask == null)
+            {
+                return NotFound();
+            }
+            return Ok(listReportTask);
+        }
+
+        [HttpGet]
+        public IActionResult GetReportTaskById(int Id)
+        {
+            var ReportTask = reporterRepository.GetTaskById(Id);
+            if (ReportTask == null)
+            {
+                return NotFound();
+            }
+            return Ok(ReportTask);
+        }
+
+        [HttpPost]
+        public IActionResult InsertReportTask(ReportTask reportTask)
+        {
+            reporterRepository.UpdateReportTask(reportTask);
+            return Ok("Insert Successfull!!!");
+        }
+
+        [HttpPut]
+        public IActionResult UpdateReportTask(ReportTask reportTask)
+        {
+            var rT = reporterRepository.GetTaskById(reportTask.Id);
+            if (rT == null)
+            {
+                return NotFound();  
+            }
+            reporterRepository.UpdateReportTask(rT);    
+            return Ok("Update Successfull!!!");
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteReportTask(int Id)
+        {
+            var rT = reporterRepository.GetTaskById(Id);
+            if (rT == null)
+            {
+                return NotFound();
+            }
+            reporterRepository.DeleteReportTask(rT);
+            return Ok("Delete Successfull!!!");
         }
 
 

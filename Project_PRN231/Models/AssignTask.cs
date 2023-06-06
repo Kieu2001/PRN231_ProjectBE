@@ -8,6 +8,7 @@ namespace Project_PRN231.Models
         public AssignTask()
         {
             Documents = new HashSet<Document>();
+            RejectTasks = new HashSet<RejectTask>();
             ReportTasks = new HashSet<ReportTask>();
             WritingTasks = new HashSet<WritingTask>();
         }
@@ -27,6 +28,7 @@ namespace Project_PRN231.Models
         public virtual User? Reporter { get; set; }
         public virtual User? Writer { get; set; }
         public virtual ICollection<Document> Documents { get; set; }
+        public virtual ICollection<RejectTask> RejectTasks { get; set; }
         public virtual ICollection<ReportTask> ReportTasks { get; set; }
         public virtual ICollection<WritingTask> WritingTasks { get; set; }
     }
