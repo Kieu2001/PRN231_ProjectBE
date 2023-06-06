@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.Extensions.Options;
 using Project_PRN231.Mapper;
 using Project_PRN231.Models;
 using Project_PRN231.Repositories;
@@ -17,7 +18,12 @@ options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.Re
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<PRN231_SUContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("ProDB")));
+builder.Services.AddDbContext<PRN231_SUContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("ProDB"), sqlServerOptions =>
+{
+	sqlServerOptions.EnableRetryOnFailure();
+}));
+
+
 builder.Services.AddScoped<PRN231_SUContext>();
 
 //Mapper
@@ -29,6 +35,7 @@ builder.Services.AddScoped<ILeaderReporitory, LeaderRepository>();
 builder.Services.AddScoped<IReporterRepository, ReporterRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
 builder.Services.AddCors(c =>
 {
