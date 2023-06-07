@@ -14,6 +14,7 @@ namespace Project_PRN231.Controllers
     {
         private readonly ILeaderReporitory assignTask;
         private readonly IMapper _mapper;
+        private PRN231_SUContext db = new PRN231_SUContext();
 
         public AssignTaskController(ILeaderReporitory trackRepository, IMapper mapper)
         {
@@ -40,7 +41,37 @@ namespace Project_PRN231.Controllers
             {
                 return NotFound();
             }
+            foreach (var item in db.Genres.ToList())
+            {
+                if (item.Id == aT.GenreId)
+                {
+                    aT.Genre = item;
+                    break;
+                } 
+            }
             return Ok(_mapper.Map<AssignTaskDTO>(aT));
+        }
+
+        [HttpGet]
+        public IActionResult GetAssignTaskByReporterId(int reportId)
+        {
+            var lstAssignForRepoter = db.AssignTasks.Where(x => x.ReporterId == reportId).ToList();
+            if (lstAssignForRepoter.Count == 0) 
+            {
+                return NotFound();  
+            }
+            return Ok(lstAssignForRepoter);
+        }
+
+        [HttpGet]
+        public IActionResult GetAllAssignTaskByWriterId(int writerId)
+        {
+            var lstAssignForWriter = db.AssignTasks.Where(x => x.WriterId == writerId).ToList();
+            if (lstAssignForWriter.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(lstAssignForWriter);
         }
 
         [HttpPost]

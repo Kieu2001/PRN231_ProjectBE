@@ -12,6 +12,7 @@ namespace Project_PRN231.Models
             AssignTaskWriters = new HashSet<AssignTask>();
             Comments = new HashSet<Comment>();
             NewsSeens = new HashSet<NewsSeen>();
+            RejectTasks = new HashSet<RejectTask>();
             ReplyComments = new HashSet<ReplyComment>();
             ReportTasks = new HashSet<ReportTask>();
             WritingTasks = new HashSet<WritingTask>();
@@ -31,6 +32,7 @@ namespace Project_PRN231.Models
         public virtual ICollection<AssignTask> AssignTaskWriters { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<NewsSeen> NewsSeens { get; set; }
+        public virtual ICollection<RejectTask> RejectTasks { get; set; }
         public virtual ICollection<ReplyComment> ReplyComments { get; set; }
         public virtual ICollection<ReportTask> ReportTasks { get; set; }
         public virtual ICollection<WritingTask> WritingTasks { get; set; }
