@@ -28,6 +28,17 @@ namespace Project_PRN231.Controllers
         {
             IEnumerable<AssignTask> lstAssignTask = new List<AssignTask>();
             lstAssignTask = assignTask.GetAllAssignTask();
+            foreach (var item in lstAssignTask)
+            {
+                foreach (var i in db.Genres.ToList())
+                {
+                    if (item.GenreId == i.Id)
+                    {
+                        item.Genre = i;
+                        break;
+                    }
+                }
+            }
             return Ok(_mapper.Map<List<AssignTaskDTO>>(lstAssignTask));
         }
 

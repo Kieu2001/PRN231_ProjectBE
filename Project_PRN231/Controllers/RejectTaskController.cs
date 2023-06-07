@@ -67,6 +67,10 @@ namespace Project_PRN231.Controllers
         public IActionResult AddRejectTask(RejectTask rejectTask)
         {
             rejectTask.IsReject = false;
+            if (rejectTask.TaskId == 0 || rejectTask.UserId == 0 || rejectTask.Reason == "")
+            {
+                return BadRequest();
+            } 
             db.RejectTasks.Add(rejectTask);
             db.SaveChanges();
             return Ok("Insert Successfull!!!");
