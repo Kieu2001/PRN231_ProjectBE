@@ -5,7 +5,7 @@ namespace Project_PRN231.Repositories.IRepository
 {
 	public interface ICommentRepository
 	{
-		IEnumerable<CommentDTO> GetAllComment();
+		IEnumerable<CommentDTO> GetCommentBrowseList();
 		Comment GetCommentById(int Id);
 		void InsertComment(Comment comment);
 		void UpdateComment(Comment comment);

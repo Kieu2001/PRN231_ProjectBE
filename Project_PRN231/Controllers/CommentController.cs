@@ -19,9 +19,9 @@ namespace Project_PRN231.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult GetAllComment()
+		public IActionResult GetCommentBrowseList()
 		{
-			var lstUser = comment.GetAllComment();
+			var lstUser = comment.GetCommentBrowseList();
 			return Ok(lstUser);
 		}
 

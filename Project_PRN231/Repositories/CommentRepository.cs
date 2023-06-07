@@ -9,7 +9,7 @@ namespace Project_PRN231.Repositories
 	{
 		public void DeleteComment(Comment comment) => CommentManagement.Instance.Delete(comment);
 
-		public IEnumerable<CommentDTO> GetAllComment() => CommentManagement.Instance.GetCommentList();
+		public IEnumerable<CommentDTO> GetCommentBrowseList() => CommentManagement.Instance.GetCommentBrowseList();
 
 		public Comment GetCommentById(int Id) => CommentManagement.Instance.GetCommentById(Id);
 

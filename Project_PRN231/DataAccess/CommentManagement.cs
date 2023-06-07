@@ -23,25 +23,27 @@ namespace Project_PRN231.DataAccess
 			}
 		}
 
-		public IEnumerable<CommentDTO> GetCommentList()
+		public IEnumerable<CommentDTO> GetCommentBrowseList()
 		{
 			List<CommentDTO> list = new List<CommentDTO>();
 			try
 			{
 				var db = new PRN231_SUContext();
 
-				list = (from c in db.Comments
-						join u in db.Users on c.UserId equals u.Id
-						join n in db.News on c.NewsId equals n.Id
-						select new CommentDTO
-						{
-							Title = n.Title,
-							Content = n.Content,
-							CreateDate = (DateTime)n.CreateDate,
-							FullName = u.FullName
-						}).ToList();
-			}
-			catch (Exception ex)
+                list = (from c in db.Comments join u in db.Users on c.UserId equals u.Id
+                                              join n in db.News on c.NewsId equals n.Id
+                                              where c.IsActive == null
+                                              select new CommentDTO
+                                              {
+												  Id = c.Id,
+                                                 Title = n.Title,
+                                                 Content = c.Content,
+                                                 CreateDate = (DateTime)n.CreateDate,
+                                                 FullName = u.FullName
+                                              }).ToList();
+
+            }
+            catch (Exception ex)
 			{
 				throw new Exception(ex.Message);
 			}
