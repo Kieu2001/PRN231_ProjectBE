@@ -117,7 +117,7 @@ namespace Project_PRN231.Controllers
         [HttpPost]
         public IActionResult InsertReportTask(ReportTask reportTask)
         {
-            reporterRepository.UpdateReportTask(reportTask);
+            reporterRepository.InsertReportTask(reportTask);
             return Ok("Insert Successfull!!!");
         }
 
