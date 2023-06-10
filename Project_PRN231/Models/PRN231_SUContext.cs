@@ -23,6 +23,8 @@ namespace Project_PRN231.Models
         public virtual DbSet<Genre> Genres { get; set; } = null!;
         public virtual DbSet<News> News { get; set; } = null!;
         public virtual DbSet<NewsSeen> NewsSeens { get; set; } = null!;
+        public virtual DbSet<RejectGenre> RejectGenres { get; set; } = null!;
+        public virtual DbSet<RejectTask> RejectTasks { get; set; } = null!;
         public virtual DbSet<ReplyComment> ReplyComments { get; set; } = null!;
         public virtual DbSet<ReportTask> ReportTasks { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
@@ -186,6 +188,35 @@ namespace Project_PRN231.Models
                     .WithMany(p => p.NewsSeens)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK__NewsSeen__User_I__4316F928");
+            });
+
+            modelBuilder.Entity<RejectGenre>(entity =>
+            {
+                entity.ToTable("RejectGenre");
+
+                entity.Property(e => e.Description).HasMaxLength(1000);
+
+                entity.Property(e => e.Name).HasMaxLength(500);
+            });
+
+            modelBuilder.Entity<RejectTask>(entity =>
+            {
+                entity.ToTable("RejectTask");
+
+                entity.HasOne(d => d.Reject)
+                    .WithMany(p => p.RejectTasks)
+                    .HasForeignKey(d => d.RejectId)
+                    .HasConstraintName("FK__RejectTas__Rejec__04E4BC85");
+
+                entity.HasOne(d => d.Task)
+                    .WithMany(p => p.RejectTasks)
+                    .HasForeignKey(d => d.TaskId)
+                    .HasConstraintName("FK__RejectTas__TaskI__05D8E0BE");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.RejectTasks)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK__RejectTas__UserI__06CD04F7");
             });
 
             modelBuilder.Entity<ReplyComment>(entity =>
