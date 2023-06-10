@@ -12,6 +12,7 @@ namespace Project_PRN231.DataAccess
         private static NewsManagement instance = null;
         private static readonly object instanceLock = new object();
         private  NewsManagement() { }
+
         public static NewsManagement Instance
         {
             get
@@ -26,6 +27,7 @@ namespace Project_PRN231.DataAccess
                 }
             }
         }
+
         public IEnumerable<News> GetNewsList()
         {
             List<News> list = new List<News>();
@@ -40,20 +42,21 @@ namespace Project_PRN231.DataAccess
             return list;
         }
 
-        public News GetNews(int id)
+        public News getNewsById(int newsId)
         {
             News? news= null;
             try
             {
                 var db = new PRN231_SUContext();
-                news = db.News.SingleOrDefault(x => x.Id == id);
-            }
-            catch (Exception ex)
+                news = db.News.SingleOrDefault(x => x.Id == newsId);
+            }catch(Exception ex)
             {
                 throw new Exception(ex.Message);
             }
             return news;
         }
+
+
         public IEnumerable<News> GetNewsByDate()
         {
             List<News> listNewsByDate = new List<News>();
@@ -68,11 +71,57 @@ namespace Project_PRN231.DataAccess
             }
             return listNewsByDate;
         }
+
         public void AddNews(News news)
         {
             try{ 
-                News news1 ;
-            }catch(Exception ex) { throw new Exception(ex.Message);}
+                News news1 = getNewsById(news.Id);
+                if(news1 != null)
+                {
+                    var db = new PRN231_SUContext();
+                    db.News.Add(news1);
+                    db.SaveChanges();
+                }
+            }catch(Exception ex) 
+            { 
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void Update(News news)
+        {
+            try
+            {
+                News news1 = getNewsById(news.Id);
+                if (news1 != null)
+                {
+                    var db = new PRN231_SUContext();
+                    db.Entry<News>(news1).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void Delete(News news)
+        {
+            try
+            {
+                News news1 = getNewsById(news.Id);
+                if (news1 != null)
+                {
+                    var db = new PRN231_SUContext();
+                    db.News.Remove(news1);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
