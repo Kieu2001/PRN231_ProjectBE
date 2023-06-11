@@ -30,7 +30,9 @@ namespace Project_PRN231.Controllers
             var securitykey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securitykey, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(_config["Jwt:Issuer"], _config["Jwt:Audience"], null,
+            var token = new JwtSecurityToken(_config["Jwt:Issuer"], 
+                _config["Jwt:Audience"], 
+                null,
                 expires: DateTime.Now.AddMinutes(1),
                 signingCredentials: credentials
                 );
@@ -40,14 +42,14 @@ namespace Project_PRN231.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Login(string email, string password)
+        public IActionResult Login(string username, string password)
         {
             IActionResult response = Unauthorized();
-            var user_ = AuthenticateUser( email, password);
+            var user_ = AuthenticateUser(username, password);
             if(user_ != null)
             {
                 var token =  GenerateToken(user_);
-                response =  Ok(new { token = token });
+                response =  Ok(new { token });
             }
             return response;
         }
