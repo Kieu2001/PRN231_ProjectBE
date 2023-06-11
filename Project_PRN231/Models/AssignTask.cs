@@ -22,6 +22,8 @@ namespace Project_PRN231.Models
         public int? GenreId { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+        public bool? IsReportAccept { get; set; }
+        public bool? IsWriterAccept { get; set; }
 
         public virtual Genre? Genre { get; set; }
         public virtual User? Leader { get; set; }
