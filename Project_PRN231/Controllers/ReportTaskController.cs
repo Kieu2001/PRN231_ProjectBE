@@ -100,6 +100,17 @@ namespace Project_PRN231.Controllers
             {
                 return NotFound();
             }
+            foreach (var item in listReportTask)
+            {
+                foreach (var i in db.AssignTasks.ToList())
+                {
+                    if (i.Id == item.TaskId)
+                    {
+                        item.Task = i;
+                        break;
+                    }
+                }
+            }
             return Ok(listReportTask);
         }
 

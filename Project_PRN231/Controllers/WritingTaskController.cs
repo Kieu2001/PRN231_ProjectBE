@@ -19,6 +19,17 @@ namespace Project_PRN231.Controllers
         public IActionResult GetAllWritingTask()
         {
             var listWritingTask = writerRepository.GetAllWritingTask();
+            foreach (var item in listWritingTask)
+            {
+                foreach (var i in db.AssignTasks.ToList())
+                {
+                    if (i.Id == item.TaskId)
+                    {
+                        item.Task = i;
+                        break;
+                    }
+                }
+            }
             return Ok(listWritingTask);
         }
 

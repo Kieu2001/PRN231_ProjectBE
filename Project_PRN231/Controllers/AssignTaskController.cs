@@ -75,6 +75,18 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpGet]
+        public IActionResult GetAssignTaskByReporter()
+        {
+            return Ok(db.AssignTasks.Where(x => x.IsReportAccept == true).ToList());
+        }
+
+        [HttpGet]
+        public IActionResult GetAssignTaskByWriter()
+        {
+            return Ok(db.AssignTasks.Where(x => x.IsWriterAccept == true).ToList());
+        }
+
+        [HttpGet]
         public IActionResult GetAllAssignTaskByWriterId(int writerId)
         {
             var lstAssignForWriter = db.AssignTasks.Where(x => x.WriterId == writerId).ToList();
