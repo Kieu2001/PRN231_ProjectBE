@@ -9,12 +9,11 @@ using System.Threading.Tasks;
 
 namespace Project_PRN231.Controllers
 {
-//    [Route("api/[controller]/[action]")]
-//    [ApiController]
-    public class NewsController : Controller
+    [Route("api/[controller]/[action]")]
+    [ApiController]
+    public class NewsController : ControllerBase
     {
-        public PRN231_SUContext db= new PRN231_SUContext();
-        private INewsRepository newsRepository;
+        private readonly INewsRepository newsRepository;
         public NewsController(INewsRepository newsRepository)
         {
             this.newsRepository = newsRepository;
@@ -84,9 +83,5 @@ namespace Project_PRN231.Controllers
             return Ok("Delete Successfull!!!");
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
     }
 }
