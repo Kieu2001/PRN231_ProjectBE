@@ -25,6 +25,7 @@ namespace Project_PRN231.Models
         public string? Phone { get; set; }
         public string? Address { get; set; }
         public int? RoleId { get; set; }
+        public DateTime? CreateDate { get; set; }
 
         public virtual Role? Role { get; set; }
         public virtual ICollection<AssignTask> AssignTaskLeaders { get; set; }
