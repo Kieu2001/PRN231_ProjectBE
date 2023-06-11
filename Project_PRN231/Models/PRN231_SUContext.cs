@@ -295,6 +295,8 @@ namespace Project_PRN231.Models
 
                 entity.Property(e => e.Address).HasMaxLength(225);
 
+                entity.Property(e => e.CreateDate).HasColumnType("datetime");
+
                 entity.Property(e => e.Email).HasMaxLength(225);
 
                 entity.Property(e => e.FullName).HasMaxLength(225);
