@@ -59,6 +59,8 @@ namespace Project_PRN231.Controllers
         public IActionResult Login(string email, string password)
         {
             var roleid = db.Users.Where(x => x.Email.Equals(email)).Select(u => u.RoleId).FirstOrDefault();
+           
+            
             // Kiểm tra thông tin đăng nhập
             if (AuthenticateUser(email, password) != null)
             {
@@ -67,6 +69,7 @@ namespace Project_PRN231.Controllers
                 {
                 new Claim("Id", email),
                 new Claim("roleId", roleid.ToString()),
+               
                 // Thêm các claim khác tùy ý
             };
 
