@@ -26,6 +26,7 @@ namespace Project_PRN231.Models
         public string? Address { get; set; }
         public int? RoleId { get; set; }
         public DateTime? CreateDate { get; set; }
+        public bool? IsBan { get; set; }
 
         public virtual Role? Role { get; set; }
         public virtual ICollection<AssignTask> AssignTaskLeaders { get; set; }
