@@ -66,33 +66,77 @@ namespace Project_PRN231.Controllers
         [HttpGet]
         public IActionResult GetAssignTaskByReporterId(int reportId)
         {
-            var lstAssignForRepoter = db.AssignTasks.Where(x => x.ReporterId == reportId).ToList();
+            var lstAssignForRepoter = db.AssignTasks.Where(x => x.ReporterId == reportId && x.IsReportAccept == false).ToList();
             if (lstAssignForRepoter.Count == 0) 
             {
                 return NotFound();  
+            }
+            foreach (var item in lstAssignForRepoter)
+            {
+                foreach (var i in db.Users.ToList())
+                {
+                    if (item.ReporterId == i.Id)
+                    {
+                        item.Reporter = i;
+                    }
+
+                    if (item.LeaderId == i.Id)
+                    {
+                        item.Leader = i;
+                    }
+
+                    if (item.WriterId == i.Id)
+                    {
+                        item.Writer = i;
+                    }
+                }
+
+                foreach (var k in db.Genres.ToList())
+                {
+                    if (item.GenreId == k.Id)
+                    {
+                        item.Genre = k;
+                    }
+                }
             }
             return Ok(lstAssignForRepoter);
         }
 
         [HttpGet]
-        public IActionResult GetAssignTaskByReporter()
-        {
-            return Ok(db.AssignTasks.Where(x => x.IsReportAccept == true).ToList());
-        }
-
-        [HttpGet]
-        public IActionResult GetAssignTaskByWriter()
-        {
-            return Ok(db.AssignTasks.Where(x => x.IsWriterAccept == true).ToList());
-        }
-
-        [HttpGet]
         public IActionResult GetAllAssignTaskByWriterId(int writerId)
         {
-            var lstAssignForWriter = db.AssignTasks.Where(x => x.WriterId == writerId).ToList();
+            var lstAssignForWriter = db.AssignTasks.Where(x => x.WriterId == writerId && x.IsWriterAccept == false).ToList();
             if (lstAssignForWriter.Count == 0)
             {
                 return NotFound();
+            }
+            foreach (var item in lstAssignForWriter)
+            {
+                foreach (var i in db.Users.ToList())
+                {
+                    if (item.ReporterId == i.Id)
+                    {
+                        item.Reporter = i;
+                    }
+
+                    if (item.LeaderId == i.Id)
+                    {
+                        item.Leader = i;
+                    }
+
+                    if (item.WriterId == i.Id)
+                    {
+                        item.Writer = i;
+                    }
+                }
+
+                foreach (var k in db.Genres.ToList())
+                {
+                    if (item.GenreId == k.Id)
+                    {
+                        item.Genre = k;
+                    }
+                }
             }
             return Ok(lstAssignForWriter);
         }
