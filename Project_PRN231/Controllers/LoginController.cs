@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Project_PRN231.DTO;
 using Project_PRN231.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -54,30 +55,40 @@ namespace Project_PRN231.Controllers
         //    return response;
         //}
 
-        [AllowAnonymous]
+       
         [HttpPost()]
-        public IActionResult Login(string email, string password)
+        public IActionResult Login(LoginDTO login)
         {
-            var roleid = db.Users.Where(x => x.Email.Equals(email)).Select(u => u.RoleId).FirstOrDefault();
-           
-            
-            // Kiểm tra thông tin đăng nhập
-            if (AuthenticateUser(email, password) != null)
+            try
             {
-                // Tạo danh sách các claim
-                var claims = new[]
+               
+                // Kiểm tra thông tin đăng nhập
+                if (AuthenticateUser(login.Email, login.Password) != null)
                 {
-                new Claim("Id", email),
-                new Claim("roleId", roleid.ToString()),
+                    User user = db.Users.Where(x => x.Email.Equals(login.Email)).SingleOrDefault();
+                    Role role = db.Roles.Where(u => u.Id == user.RoleId).SingleOrDefault();
+
+                    // Tạo danh sách các claim
+                    var claims = new[]
+                    {
+                new Claim("Id", user.Id.ToString()),
+                new Claim("roleId", user.RoleId.ToString()),
+                new Claim("FullName", user.FullName),
+                new Claim("Role_Name",role.RoleName),
                
                 // Thêm các claim khác tùy ý
             };
 
-                // Tạo token
-                var token = GenerateToken(claims);
+                    // Tạo token
+                    var token = GenerateToken(claims);
 
-                return Ok(new { token });
+                    return Ok(new { token });
+                }
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
+           
 
             return Unauthorized();
         }
