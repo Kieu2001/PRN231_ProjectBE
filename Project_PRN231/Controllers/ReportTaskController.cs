@@ -110,15 +110,6 @@ namespace Project_PRN231.Controllers
                         break;
                     }
                 }
-
-                foreach (var k in db.Users.ToList())
-                {
-                    if (item.UserId == k.Id)
-                    {
-                        item.User = k;
-                        break;
-                    }
-                }
             }
            
             return Ok(listReportTask);
@@ -133,17 +124,6 @@ namespace Project_PRN231.Controllers
                 return NotFound();
             }
             return Ok(ReportTask);
-        }
-
-        [HttpGet]
-        public IActionResult GetReportTaskByTaskId(int taskId)
-        {
-            var tast = db.ReportTasks.FirstOrDefault(x => x.TaskId == taskId);
-            if (tast == null)
-            {
-                return NotFound();
-            }
-            return Ok(tast);
         }
 
         [HttpPost]

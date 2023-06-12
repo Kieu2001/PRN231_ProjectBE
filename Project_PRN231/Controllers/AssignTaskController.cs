@@ -141,34 +141,6 @@ namespace Project_PRN231.Controllers
             return Ok(lstAssignForWriter);
         }
 
-        public class AccecptTask
-        {
-            public int? Id { get; set; }
-            public string? UserStatus { get; set; }
-            public bool IsStatus { get; set; } 
-        }
-
-        [HttpPut]
-        public IActionResult AcceptTask(AccecptTask accecptTask)
-        {
-            AssignTask? aT = db.AssignTasks.FirstOrDefault(x => x.Id == accecptTask.Id);
-            if (aT == null)
-            {
-                return NotFound();
-            }
-            if (accecptTask.UserStatus.Equals("Reporter"))
-            {
-                aT.IsReportAccept = true;
-            } else
-            {
-                aT.IsWriterAccept = true;
-            }
-
-            db.Entry<AssignTask>(aT).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            db.SaveChanges();
-            return Ok("Update Successfull!!!");
-        }
-
         [HttpPost]
         //[Authorize]
         public async Task<IActionResult> AddAssignTask(AssignTask asTask)
