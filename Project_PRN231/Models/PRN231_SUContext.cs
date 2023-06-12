@@ -301,6 +301,8 @@ namespace Project_PRN231.Models
 
                 entity.Property(e => e.FullName).HasMaxLength(225);
 
+                entity.Property(e => e.Image).HasMaxLength(100);
+
                 entity.Property(e => e.Password).HasMaxLength(225);
 
                 entity.Property(e => e.Phone).HasMaxLength(12);
