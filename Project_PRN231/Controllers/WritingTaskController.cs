@@ -73,7 +73,22 @@ namespace Project_PRN231.Controllers
             {
                 return NotFound();
             }
-            //New Change
+            if (writingTask.Title != null)
+            {
+                wT.Title = writingTask.Title;
+            }
+
+            if (writingTask.Description != null)
+            {
+                wT.Description = writingTask.Description;
+            }
+
+            if (writingTask.Content != null)
+            {
+                wT.Content = writingTask.Content;
+            }
+
+            if (wT == null)
             
             writerRepository.UpdateWritingTask(wT);
             return Ok("Update Successfull!!!");
