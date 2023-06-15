@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Project_PRN231.Models;
 using Project_PRN231.Repositories.IRepository;
+using System.Net.WebSockets;
 
 namespace Project_PRN231.Controllers
 {
@@ -124,6 +125,25 @@ namespace Project_PRN231.Controllers
                 return NotFound();
             }
             return Ok(ReportTask);
+        }
+
+        [HttpGet]
+        public IActionResult GetReportTaskByTaskId(int taskId)
+        {
+            var task = db.ReportTasks.FirstOrDefault(x => x.TaskId == taskId);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            foreach (var item in db.AssignTasks.ToList())
+            {
+                if (item.Id == task.TaskId)
+                {
+                    task.Task = item;
+                }
+            }
+            return Ok(task);
         }
 
         [HttpPost]
