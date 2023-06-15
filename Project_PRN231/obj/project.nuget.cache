@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "mAmx0xny9kgtjBHSuQAFDQBmduCVUvUQjixRUwGcTZtPz1B451Lrjg1NueI+6JqLJe4JCN0x4S5dV8RzjP9uvQ==",
+  "dgSpecHash": "UqTvBkhoFeaXIWoV3llPJGExQJLkYUKBKsMfxULxsBpb/iUqSOou3uvYa7GN4ecxI1ArncOb70P5jEukXQzgOw==",
   "success": true,
   "projectFilePath": "E:\\Visual Studio 2019\\Project_PRN231\\PRN231_ProjectBE\\Project_PRN231\\Project_PRN231.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\jetbrains.annotations\\2022.3.1\\jetbrains.annotations.2022.3.1.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.16\\microsoft.aspnetcore.authentication.jwtbearer.6.0.16.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\6.0.16\\microsoft.aspnetcore.jsonpatch.6.0.16.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\6.0.16\\microsoft.aspnetcore.mvc.newtonsoftjson.6.0.16.nupkg.sha512",
@@ -66,7 +67,8 @@
     "C:\\Users\\ADMIN\\.nuget\\packages\\system.text.encoding.codepages\\4.7.0\\system.text.encoding.codepages.4.7.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512",
-    "C:\\Users\\ADMIN\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
+    "C:\\Users\\ADMIN\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\x.pagedlist\\8.4.7\\x.pagedlist.8.4.7.nupkg.sha512"
   ],
   "logs": []
 }

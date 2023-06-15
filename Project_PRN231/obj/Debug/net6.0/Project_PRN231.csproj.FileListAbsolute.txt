@@ -223,3 +223,5 @@ C:\Users\User\Desktop\2.1\PRN231_ProjectBE\Project_PRN231\obj\Debug\net6.0\refin
 C:\Users\User\Desktop\2.1\PRN231_ProjectBE\Project_PRN231\obj\Debug\net6.0\Project_PRN231.pdb
 C:\Users\User\Desktop\2.1\PRN231_ProjectBE\Project_PRN231\obj\Debug\net6.0\Project_PRN231.genruntimeconfig.cache
 C:\Users\User\Desktop\2.1\PRN231_ProjectBE\Project_PRN231\obj\Debug\net6.0\ref\Project_PRN231.dll
+E:\Visual Studio 2019\Project_PRN231\PRN231_ProjectBE\Project_PRN231\bin\Debug\net6.0\JetBrains.Annotations.dll
+E:\Visual Studio 2019\Project_PRN231\PRN231_ProjectBE\Project_PRN231\bin\Debug\net6.0\X.PagedList.dll

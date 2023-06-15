@@ -24,5 +24,18 @@ namespace Project_PRN231.Controllers
             }
             return Ok(listDoc);
         }
+
+        [HttpDelete]
+        public IActionResult DeleteDocument(int id)
+        {
+            var doc = db.Documents.FirstOrDefault(x => x.Id == id);
+            if (doc == null)
+            {
+                return NotFound();
+            }
+            db.Documents.Remove(doc);
+            db.SaveChanges();
+            return Ok("Delete Successfull!!!");
+        }
     }
 }

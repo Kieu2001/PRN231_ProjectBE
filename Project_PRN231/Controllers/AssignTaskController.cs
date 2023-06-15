@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Project_PRN231.DTO;
 using Project_PRN231.Models;
 using Project_PRN231.Repositories.IRepository;
+using X.PagedList;
 
 namespace Project_PRN231.Controllers
 {

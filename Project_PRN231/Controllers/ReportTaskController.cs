@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Project_PRN231.Models;
 using Project_PRN231.Repositories.IRepository;
+using System.Net.WebSockets;
 
 namespace Project_PRN231.Controllers
 {
@@ -23,7 +24,7 @@ namespace Project_PRN231.Controllers
         [HttpPost]
         public async Task<ActionResult> UploadFile(List<IFormFile> files, int TaskId)
         {
-            if (files.Count== 0)
+            if (files.Count == 0)
             {
                 return BadRequest();
             }
@@ -111,7 +112,7 @@ namespace Project_PRN231.Controllers
                     }
                 }
             }
-           
+
             return Ok(listReportTask);
         }
 
@@ -126,6 +127,25 @@ namespace Project_PRN231.Controllers
             return Ok(ReportTask);
         }
 
+        [HttpGet]
+        public IActionResult GetReportTaskByTaskId(int taskId)
+        {
+            var task = db.ReportTasks.FirstOrDefault(x => x.TaskId == taskId);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            foreach (var item in db.AssignTasks.ToList())
+            {
+                if (item.Id == task.TaskId)
+                {
+                    task.Task = item;
+                }
+            }
+            return Ok(task);
+        }
+
         [HttpPost]
         public IActionResult InsertReportTask(ReportTask reportTask)
         {
@@ -133,15 +153,51 @@ namespace Project_PRN231.Controllers
             return Ok("Insert Successfull!!!");
         }
 
-        [HttpPut]
-        public IActionResult UpdateReportTask(ReportTask reportTask)
+        public class UpdateClass
         {
-            var rT = reporterRepository.GetTaskById(reportTask.Id);
+            public string Content { get; set; }
+            public string Description { get; set; }
+            public int Id { get; set; }
+            public string Image { get; set; }
+            public bool IsChecked { get; set; }
+            public string Title { get; set; }
+
+        }
+
+        [HttpPut]
+        public IActionResult UpdateReportTask(UpdateClass uC)
+        {
+            var rT = reporterRepository.GetTaskById(uC.Id);
             if (rT == null)
             {
-                return NotFound();  
+                return NotFound();
             }
-            reporterRepository.UpdateReportTask(rT);    
+
+            if (uC.Title != null)
+            {
+                rT.Title = uC.Title;
+            }
+
+            if (uC.Description != null)
+            {
+                rT.Description = uC.Description;
+            }
+
+            if (uC.Content != null)
+            {
+                rT.Content = uC.Content;
+            }
+
+            if (uC.Image != null)
+            {
+                rT.Image = uC.Image;
+            }
+
+            if (uC.IsChecked != true)
+            {
+                uC.IsChecked = false;
+            }
+            reporterRepository.UpdateReportTask(rT);
             return Ok("Update Successfull!!!");
         }
 
