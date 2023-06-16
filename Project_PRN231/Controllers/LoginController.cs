@@ -56,7 +56,7 @@ namespace Project_PRN231.Controllers
         //}
 
        
-        [HttpPost()]
+        [HttpPost]
         public IActionResult Login(LoginDTO login)
         {
             try
@@ -92,6 +92,7 @@ namespace Project_PRN231.Controllers
 
             return Unauthorized();
         }
+        
 
 
         private string GenerateToken(Claim[] claims)

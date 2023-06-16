@@ -83,5 +83,19 @@ namespace Project_PRN231.Controllers
             return Ok("Delete Successfull!!!");
         }
 
+        [HttpGet]
+        public IActionResult getAllGenres()
+        {
+            var listGenre = newsRepository.GetAllGenres();
+            if(listGenre == null)  return NotFound();
+            return Ok(listGenre);
+        }
+        [HttpGet]
+        public IActionResult getNewByGenreId(int id)
+        {
+            var list = newsRepository.GetNewsByGenreId(id);
+            if (list == null) return NotFound();
+            return Ok(list);
+        }
     }
 }

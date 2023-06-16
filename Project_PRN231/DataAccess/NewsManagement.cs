@@ -123,5 +123,34 @@ namespace Project_PRN231.DataAccess
                 throw new Exception(ex.Message);
             }
         }
+        public IEnumerable<Genre> GetAllGenres()
+        {
+            List<Genre> genres = new List<Genre>();
+            try 
+            {
+                var db = new PRN231_SUContext();
+                genres = db.Genres.ToList();
+               
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return genres;
+        }
+
+        public IEnumerable<News> GetNewsByGenreId(int id)
+        {
+            List<News> list = new List<News>();
+            try
+            {
+                var db = new PRN231_SUContext();
+                list = db.News.Where(x => x.GenreId == id).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return list;
+        }
     }
 }
