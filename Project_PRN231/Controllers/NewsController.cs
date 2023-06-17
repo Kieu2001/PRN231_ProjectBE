@@ -97,5 +97,16 @@ namespace Project_PRN231.Controllers
             if (list == null) return NotFound();
             return Ok(list);
         }
+        [HttpGet("data")]
+        public IActionResult GetData( int page )
+        {
+            int pageSize = 2;
+            var allData = newsRepository.GetNewsList();
+            int startIndex = (page - 1) * pageSize;
+            int endIndex = page * pageSize;
+
+            var currentPageData = allData.Skip(startIndex).Take(pageSize);
+            return Ok(currentPageData);
+        }
     }
 }
