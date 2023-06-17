@@ -56,43 +56,47 @@ namespace Project_PRN231.Controllers
         //}
 
        
-        [HttpPost]
-        public IActionResult Login(LoginDTO login)
-        {
-            try
-            {
+
+        //[HttpPost()]
+        //public IActionResult Login(LoginDTO login)
+        //{
+        //    try
+        //    {
+
                
-                // Kiểm tra thông tin đăng nhập
-                if (AuthenticateUser(login.Email, login.Password) != null)
-                {
-                    User user = db.Users.Where(x => x.Email.Equals(login.Email)).SingleOrDefault();
-                    Role role = db.Roles.Where(u => u.Id == user.RoleId).SingleOrDefault();
+        //        // Kiểm tra thông tin đăng nhập
+        //        if (AuthenticateUser(login.Email, login.Password) != null)
+        //        {
+        //            User user = db.Users.Where(x => x.Email.Equals(login.Email)).SingleOrDefault();
+        //            Role role = db.Roles.Where(u => u.Id == user.RoleId).SingleOrDefault();
 
-                    // Tạo danh sách các claim
-                    var claims = new[]
-                    {
-                new Claim("Id", user.Id.ToString()),
-                new Claim("roleId", user.RoleId.ToString()),
-                new Claim("FullName", user.FullName),
-                new Claim("Role_Name",role.RoleName),
+        //            // Tạo danh sách các claim
+        //            var claims = new[]
+        //            {
+        //        new Claim("Id", user.Id.ToString()),
+        //        new Claim("roleId", user.RoleId.ToString()),
+        //        new Claim("FullName", user.FullName),
+        //        new Claim("Role_Name",role.RoleName),
                
-                // Thêm các claim khác tùy ý
-            };
+        //        // Thêm các claim khác tùy ý
+        //    };
 
-                    // Tạo token
-                    var token = GenerateToken(claims);
+        //            // Tạo token
+        //            var token = GenerateToken(claims);
 
-                    return Ok(new { token });
-                }
-            }catch(Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+        //            return Ok(new { token });
+        //        }
+        //    }catch(Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
            
 
-            return Unauthorized();
-        }
+
+//             return Unauthorized();
+//         }
         
+
 
 
         private string GenerateToken(Claim[] claims)
