@@ -106,7 +106,7 @@ namespace Project_PRN231.Controllers
         [HttpGet]
         public IActionResult GetAllAssignTaskByWriterId(int writerId)
         {
-            var lstAssignForWriter = db.AssignTasks.Where(x => x.WriterId == writerId && x.IsWriterAccept == false).ToList();
+            var lstAssignForWriter = db.AssignTasks.Where(x => x.WriterId == writerId && (x.IsWriterAccept == false || x.IsWriterAccept == null)).ToList();
             if (lstAssignForWriter.Count == 0)
             {
                 return NotFound();
@@ -150,8 +150,68 @@ namespace Project_PRN231.Controllers
             return Ok("Insert Successfull!!!");
         }
 
+        public class AcceptClass
+        {
+            public int Id { get; set; }
+            public string RoleName { get; set; }
+            public bool IsAccept { get; set; }  
+        }
+
         [HttpPut]
-        //[Authorize]
+        public IActionResult AcceptTask(AcceptClass acceptClass)
+        {
+            var task = db.AssignTasks.FirstOrDefault(x => x.Id == acceptClass.Id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+            //if (task.IsWriterAccept == true)
+            //{
+            //    task.IsWriterAccept = true;
+            //}
+
+            //if(task.IsReportAccept == true) 
+            //{
+            //    task.IsReportAccept = true;
+            //}
+
+            if (acceptClass.RoleName == "Reporter")
+            {
+                task.IsReportAccept= true;
+            }
+            if (acceptClass.RoleName == "Writer")
+            {
+                task.IsWriterAccept= true;
+            }
+            Console.WriteLine(task);
+            db.Entry<AssignTask>(task).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.SaveChanges();
+            return Ok("Update Successfull!");
+        }
+
+        [HttpPut]
+        public IActionResult RejectTask(AcceptClass acceptClass)
+        {
+            var task = db.AssignTasks.FirstOrDefault(x => x.Id == acceptClass.Id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            if (acceptClass.RoleName == "Reporter")
+            {
+                task.IsReportAccept = false;
+            }
+            if (acceptClass.RoleName == "Writer")
+            {
+                task.IsWriterAccept = false;
+            }
+            db.Entry<AssignTask>(task).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.SaveChanges();
+            return Ok();
+        }
+
+        [HttpPut]
         public async Task<IActionResult> UpdateAssignTask(AssignTask asTask)
         {
             var aT = assignTask.GetAssignTaskById(asTask.Id);

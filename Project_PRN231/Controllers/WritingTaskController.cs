@@ -12,10 +12,12 @@ namespace Project_PRN231.Controllers
     public class WritingTaskController : ControllerBase
     {
         private readonly IWriterRepository writerRepository;
+        private readonly IWebHostEnvironment _env;
         public PRN231_SUContext db = new PRN231_SUContext();
-        public WritingTaskController(IWriterRepository _writerRepository)
+        public WritingTaskController(IWriterRepository _writerRepository, IWebHostEnvironment env)
         {
             writerRepository = _writerRepository;
+            _env = env;
         }
         [HttpGet]
         public IActionResult GetAllWritingTask()
@@ -135,6 +137,30 @@ namespace Project_PRN231.Controllers
             }
             writerRepository.DeleteWritingTask(writingTask);
             return Ok("Delete Successfull!!!");
+        }
+
+        [HttpPost]
+        public JsonResult SaveFile()
+        {
+            try
+            {
+                var httpRequest = Request.Form;
+                var postedFile = httpRequest.Files[0];
+                string filename = postedFile.FileName;
+                var physicalPath = _env.ContentRootPath + "/Photos/" + filename;
+
+                using (var stream = new FileStream(physicalPath, FileMode.Create))
+                {
+                    postedFile.CopyTo(stream);
+                }
+
+                return new JsonResult(filename);
+            }
+            catch (Exception)
+            {
+
+                return new JsonResult("anonymous.png");
+            }
         }
     }
 }
