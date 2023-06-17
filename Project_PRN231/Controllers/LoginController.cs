@@ -56,11 +56,13 @@ namespace Project_PRN231.Controllers
         //}
 
        
+
         //[HttpPost()]
         //public IActionResult Login(LoginDTO login)
         //{
         //    try
         //    {
+
                
         //        // Kiểm tra thông tin đăng nhập
         //        if (AuthenticateUser(login.Email, login.Password) != null)
@@ -90,8 +92,11 @@ namespace Project_PRN231.Controllers
         //    }
            
 
-        //    return Unauthorized();
-        //}
+
+//             return Unauthorized();
+//         }
+        
+
 
 
         private string GenerateToken(Claim[] claims)
