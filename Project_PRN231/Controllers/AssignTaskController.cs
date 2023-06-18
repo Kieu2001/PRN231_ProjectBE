@@ -67,7 +67,7 @@ namespace Project_PRN231.Controllers
         [HttpGet]
         public IActionResult GetAssignTaskByReporterId(int reportId)
         {
-            var lstAssignForRepoter = db.AssignTasks.Where(x => x.ReporterId == reportId && x.IsReportAccept == false).ToList();
+            var lstAssignForRepoter = db.AssignTasks.Where(x => x.ReporterId == reportId && (x.IsWriterAccept == false || x.IsWriterAccept == null)).ToList();
             if (lstAssignForRepoter.Count == 0) 
             {
                 return NotFound();  
