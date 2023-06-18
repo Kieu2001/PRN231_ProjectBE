@@ -113,6 +113,16 @@ namespace Project_PRN231.Controllers
                 }
             }
 
+            foreach (var item in listReportTask)
+            {
+                foreach (var i in db.Genres.ToList())
+                {
+                    if (item.Task.GenreId == i.Id)
+                    {
+                        item.Task.Genre = i;
+                    }
+                }
+            }
             return Ok(listReportTask);
         }
 
@@ -124,6 +134,15 @@ namespace Project_PRN231.Controllers
             {
                 return NotFound();
             }
+            foreach (var item in db.Users.ToList())
+            {
+                if (item.Id == ReportTask.UserId)
+                {
+                    ReportTask.User= item;
+                    break;
+                }
+            }
+
             return Ok(ReportTask);
         }
 
@@ -141,6 +160,15 @@ namespace Project_PRN231.Controllers
                 if (item.Id == task.TaskId)
                 {
                     task.Task = item;
+                }
+            }
+
+            foreach (var item in db.Users.ToList())
+            {
+                if (item.Id == task.UserId)
+                {
+                    task.User = item;
+                    break;
                 }
             }
             return Ok(task);
@@ -199,6 +227,20 @@ namespace Project_PRN231.Controllers
             }
             reporterRepository.UpdateReportTask(rT);
             return Ok("Update Successfull!!!");
+        }
+
+        [HttpPut] 
+        public IActionResult AcceptTask(int Id)
+        {
+            var tas = db.ReportTasks.FirstOrDefault(x => x.Id == Id);   
+            if (tas == null)
+            {
+                return NotFound();
+            }
+            tas.IsChecked = true;
+            db.Entry<ReportTask>(tas).State = EntityState.Modified;
+            db.SaveChanges();
+            return Ok();
         }
 
         [HttpDelete]

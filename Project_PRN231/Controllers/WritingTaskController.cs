@@ -34,6 +34,17 @@ namespace Project_PRN231.Controllers
                     }
                 }
             }
+
+            foreach (var item in listWritingTask)
+            {
+                foreach (var i in db.Genres.ToList())
+                {
+                    if (item.Task.GenreId == i.Id)
+                    {
+                        item.Task.Genre = i;
+                    }
+                }
+            }
             return Ok(listWritingTask);
         }
 
@@ -61,14 +72,14 @@ namespace Project_PRN231.Controllers
                 }
             }
 
-            foreach (var item in db.Users.ToList())
-            {
-                if (item.Id == wT.UserId)
-                {
-                    wT.User = item;
-                    break;
-                }
-            }
+            //foreach (var item in db.Users.ToList())
+            //{
+            //    if (item.Id == wT.UserId)
+            //    {
+            //        wT.User = item;
+            //        break;
+            //    }
+            //}
 
             
 
@@ -125,6 +136,68 @@ namespace Project_PRN231.Controllers
             }
             writerRepository.UpdateWritingTask(wT);
             return Ok("Update Successfull!!!");
+        }
+
+        public class FeedBackClass
+        {
+            public int Id { get; set; }
+            public string Comment { get; set; }
+        }
+
+        [HttpPut]
+        public IActionResult FeedBackTask(FeedBackClass feedBackClass)
+        {
+            var task = db.WritingTasks.FirstOrDefault(x => x.Id == feedBackClass.Id);
+            if (task== null)
+            {
+                return NotFound();
+            }
+            task.Comment = feedBackClass.Comment;
+            db.Entry<WritingTask>(task).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.SaveChanges();
+            return Ok("FeedBack Successful!!!");
+        }
+
+        [HttpPut]   
+        public IActionResult AcceptToPublic(int Id)
+        {
+            var tas = db.WritingTasks.FirstOrDefault(x =>x.Id == Id);
+            if (tas == null)
+            {
+                return NotFound();
+            }
+            tas.IsChecked = true;
+            db.Entry<WritingTask>(tas).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.SaveChanges();
+            foreach (var item in db.Genres.ToList())
+            {
+                foreach (var i in db.AssignTasks.ToList())
+                {
+                    if (item.Id == i.GenreId)
+                    {
+                        if (item.Id == tas.TaskId)
+                        {
+                            tas.Task.Genre = item;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            News news = new News
+            {
+                Title = tas.Title, 
+                Description = tas.Description, 
+                Content = tas.Content, 
+                Image = tas.Image, 
+                CreateBy = tas.CreateBy, 
+                CreateDate = tas.CreateDate, 
+                GenreId = tas.Task.GenreId, 
+                Entered = 0, 
+            };
+            db.News.Add(news);
+            db.SaveChanges();
+            return Ok("Accept Successfull");
         }
 
         [HttpDelete]
