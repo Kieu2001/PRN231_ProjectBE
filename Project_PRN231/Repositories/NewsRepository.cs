@@ -16,6 +16,8 @@ namespace Project_PRN231.Repositories
 
         public IEnumerable<News> GetNewsByDate() => NewsManagement.Instance.GetNewsByDate();
 
+        public int GetNewsByDate(int begin, int end) => NewsManagement.Instance.GetNewsByDate(begin, end);
+
         public News getNewsById(int newsId) => NewsManagement.Instance.getNewsById(newsId);
 
         public IEnumerable<News> GetNewsList() => NewsManagement.Instance.GetNewsList();
