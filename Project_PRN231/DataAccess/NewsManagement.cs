@@ -152,5 +152,17 @@ namespace Project_PRN231.DataAccess
             }
             return list;
         }
+
+        public int GetNewsByDate(int begin, int end)
+        {
+            DateTime startDate = DateTime.Now.AddDays(-begin);
+            DateTime endDate = DateTime.Now.AddDays(-end);
+
+
+            using (var db = new PRN231_SUContext())
+            {
+                return db.News.Count(u => u.CreateDate >= endDate && u.CreateDate <= startDate);
+            }
+        }
     }
 }
