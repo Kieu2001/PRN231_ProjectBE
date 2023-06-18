@@ -108,5 +108,16 @@ namespace Project_PRN231.Controllers
             var currentPageData = allData.Skip(startIndex).Take(pageSize);
             return Ok(currentPageData);
         }
+
+        [HttpGet]
+        public IActionResult getNewsByDate(int begin, int end)
+        {
+            var listNewsByDate = newsRepository.GetNewsByDate(begin, end);
+            if (listNewsByDate == null)
+            {
+                return NotFound();
+            }
+            return Ok(listNewsByDate);
+        }
     }
 }
