@@ -40,7 +40,27 @@ namespace Project_PRN231.Controllers
                     }
                 }
             }
-            return Ok(_mapper.Map<List<AssignTaskDTO>>(lstAssignTask));
+            foreach (var item in lstAssignTask)
+            {
+                foreach (var i in db.Users.ToList())
+                {
+                    if (item.WriterId == i.Id)
+                    {
+                        item.Writer = i;
+                    }
+
+                    if (item.ReporterId == i.Id)
+                    {
+                        item.Reporter = i;
+                    }
+
+                    if (item.LeaderId == i.Id)
+                    {
+                        item.Leader = i;
+                    }
+                }
+            }
+            return Ok(lstAssignTask);
         }
 
         [HttpGet]
