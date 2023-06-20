@@ -53,6 +53,7 @@ namespace Project_PRN231.Controllers
         {
             return Ok(user.GetUserRole(id));
         }
+
         [HttpPost]
         public IActionResult InsertUser(User use)
         {

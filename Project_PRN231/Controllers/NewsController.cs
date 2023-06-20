@@ -30,16 +30,16 @@ namespace Project_PRN231.Controllers
             return Ok(listNews);
         }
 
-        [HttpGet]
-        public IActionResult getNewsByDate()
-        {
-            var listNewsByDate = newsRepository.GetNewsByDate();
-            if(listNewsByDate == null)
-            {
-                return NotFound();
-            }
-            return Ok(listNewsByDate);
-        }
+        //[HttpGet]
+        //public IActionResult getNewsByDate()
+        //{
+        //    var listNewsByDate = newsRepository.GetNewsByDate();
+        //    if(listNewsByDate == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(listNewsByDate);
+        //}
 
         [HttpGet]
         public IActionResult getNewsById(int id)
