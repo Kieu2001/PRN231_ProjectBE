@@ -110,14 +110,33 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpGet]
-        public IActionResult getNewsByDate(int begin, int end)
+        public IActionResult GetDataByDate(int page)
         {
-            var listNewsByDate = newsRepository.GetNewsByDate(begin, end);
-            if (listNewsByDate == null)
-            {
-                return NotFound();
-            }
-            return Ok(listNewsByDate);
+            int pageSize = 2;
+            var allData = newsRepository.GetNewsByDate();
+            int startIndex = (page - 1) * pageSize;
+            int endIndex = page * pageSize;
+
+            var currentPageData = allData.Skip(startIndex).Take(pageSize);
+            return Ok(currentPageData);
         }
+        [HttpGet]
+        public IActionResult getNewsFirst()
+        {
+            var newfirst = newsRepository.newsFirst();
+
+            return Ok(newfirst);
+        }
+
+        //[HttpGet]
+        //public IActionResult getNewsByDate(int begin, int end)
+        //{
+        //    var listNewsByDate = newsRepository.GetNewsByDate(begin, end);
+        //    if (listNewsByDate == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(listNewsByDate);
+        //}
     }
 }
