@@ -163,14 +163,14 @@ namespace Project_PRN231.Controllers
                 }
             }
 
-            foreach (var item in db.Users.ToList())
-            {
-                if (item.Id == task.UserId)
-                {
-                    task.User = item;
-                    break;
-                }
-            }
+            //foreach (var item in db.Users.ToList())
+            //{
+            //    if (item.Id == task.UserId)
+            //    {
+            //        task.User = item;
+            //        break;
+            //    }
+            //}
             return Ok(task);
         }
 

@@ -14,6 +14,7 @@ namespace Project_PRN231.Repositories.IRepository
         void Delete(News news);
         IEnumerable<Genre> GetAllGenres();
         IEnumerable<News> GetNewsByGenreId(int id);
+        IEnumerable<News> newsFirst();
 
     }
 }

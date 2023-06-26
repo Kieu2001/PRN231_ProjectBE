@@ -30,16 +30,16 @@ namespace Project_PRN231.Controllers
             return Ok(listNews);
         }
 
-        [HttpGet]
-        public IActionResult getNewsByDate()
-        {
-            var listNewsByDate = newsRepository.GetNewsByDate();
-            if(listNewsByDate == null)
-            {
-                return NotFound();
-            }
-            return Ok(listNewsByDate);
-        }
+        //[HttpGet]
+        //public IActionResult getNewsByDate()
+        //{
+        //    var listNewsByDate = newsRepository.GetNewsByDate();
+        //    if(listNewsByDate == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(listNewsByDate);
+        //}
 
         [HttpGet]
         public IActionResult getNewsById(int id)
@@ -108,6 +108,26 @@ namespace Project_PRN231.Controllers
             var currentPageData = allData.Skip(startIndex).Take(pageSize);
             return Ok(currentPageData);
         }
+
+        [HttpGet]
+        public IActionResult GetDataByDate(int page)
+        {
+            int pageSize = 2;
+            var allData = newsRepository.GetNewsByDate();
+            int startIndex = (page - 1) * pageSize;
+            int endIndex = page * pageSize;
+
+            var currentPageData = allData.Skip(startIndex).Take(pageSize);
+            return Ok(currentPageData);
+        }
+        [HttpGet]
+        public IActionResult getNewsFirst()
+        {
+            var newfirst = newsRepository.newsFirst();
+
+            return Ok(newfirst);
+        }
+
 
         //[HttpGet]
         //public IActionResult getNewsByDate(int begin, int end)

@@ -32,18 +32,23 @@ namespace Project_PRN231.Controllers
 
 
 
+
         [HttpPost]
+
         public IActionResult Login(LoginDTO login)
         {
             try
             {
 
 
+
                 // kiểm tra thông tin đăng nhập
+
                 if (AuthenticateUser(login.Email, login.Password) != null)
                 {
                     User user = db.Users.Where(x => x.Email.Equals(login.Email)).SingleOrDefault();
                     Role role = db.Roles.Where(u => u.Id == user.RoleId).SingleOrDefault();
+
 
                     // tạo danh sách các claim
                     var claims = new[]
@@ -56,7 +61,7 @@ namespace Project_PRN231.Controllers
                 // thêm các claim khác tùy ý
             };
 
-                    // tạo token
+
                     var token = GenerateToken(claims);
 
                     return Ok(new { token });
@@ -84,7 +89,7 @@ namespace Project_PRN231.Controllers
                 _config["Jwt:Issuer"],
                 _config["Jwt:Audience"],
                 claims,
-                expires: DateTime.Now.AddDays(7),
+                expires: DateTime.Now.AddHours(1),
                 signingCredentials: credentials
             );
 

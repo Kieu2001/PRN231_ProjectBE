@@ -27,6 +27,10 @@ namespace Project_PRN231.Repositories
         public IEnumerable<Genre> GetAllGenres() => NewsManagement.Instance.GetAllGenres();
 
         public IEnumerable<News> GetNewsByGenreId(int id) => NewsManagement.Instance.GetNewsByGenreId(id);
+
+        public IEnumerable<News> newsFirst() => NewsManagement.Instance.newsFirst();
+
         
+      
     }
 }
