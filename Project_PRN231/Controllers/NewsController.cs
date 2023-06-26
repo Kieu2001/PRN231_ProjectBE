@@ -109,15 +109,15 @@ namespace Project_PRN231.Controllers
             return Ok(currentPageData);
         }
 
-        [HttpGet]
-        public IActionResult getNewsByDate(int begin, int end)
-        {
-            var listNewsByDate = newsRepository.GetNewsByDate(begin, end);
-            if (listNewsByDate == null)
-            {
-                return NotFound();
-            }
-            return Ok(listNewsByDate);
-        }
+        //[HttpGet]
+        //public IActionResult getNewsByDate(int begin, int end)
+        //{
+        //    var listNewsByDate = newsRepository.GetNewsByDate(begin, end);
+        //    if (listNewsByDate == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(listNewsByDate);
+        //}
     }
 }
