@@ -7,7 +7,6 @@ using Project_PRN231.Models;
 using Project_PRN231.Repositories;
 using Project_PRN231.Repositories.IRepository;
 using System.Text;
-using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,10 +32,8 @@ builder.Services.AddScoped<ILeaderReporitory, LeaderRepository>();
 builder.Services.AddScoped<IReporterRepository, ReporterRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<INewsRepository, NewsRepository>();
 
-//builder.Services.AddIdentity<User, Role>()
-//    .AddEntityFrameworkStores<PRN231_SUContext>();
-//Token
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(option =>
     {
@@ -77,12 +74,5 @@ app.UseAuthorization();
 app.UseAuthentication();
 
 app.MapControllers();
-
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-                   Path.Combine(Directory.GetCurrentDirectory(), "Photos")),
-    RequestPath = "/Photos"
-});
 
 app.Run();

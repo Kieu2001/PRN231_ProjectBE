@@ -83,43 +83,5 @@ namespace Project_PRN231.Controllers
             return Ok("Delete Successfull!!!");
         }
 
-        [HttpGet]
-        public IActionResult getAllGenres()
-        {
-            var listGenre = newsRepository.GetAllGenres();
-            if(listGenre == null)  return NotFound();
-            return Ok(listGenre);
-        }
-        [HttpGet]
-        public IActionResult getNewByGenreId(int id)
-        {
-            var list = newsRepository.GetNewsByGenreId(id);
-            if (list == null) return NotFound();
-            return Ok(list);
-        }
-        [HttpGet("data")]
-        public IActionResult GetData( int page )
-        {
-            int pageSize = 2;
-            var allData = newsRepository.GetNewsList();
-            int startIndex = (page - 1) * pageSize;
-            int endIndex = page * pageSize;
-
-            var currentPageData = allData.Skip(startIndex).Take(pageSize);
-            return Ok(currentPageData);
-        }
-
-        /*
-        [HttpGet]
-        public IActionResult getNewsByDate(int begin, int end)
-        {
-            var listNewsByDate = newsRepository.GetNewsByDate(begin, end);
-            if (listNewsByDate == null)
-            {
-                return NotFound();
-            }
-            return Ok(listNewsByDate);
-        }
-        */
     }
 }

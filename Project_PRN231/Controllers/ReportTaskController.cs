@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Project_PRN231.Models;
 using Project_PRN231.Repositories.IRepository;
-using System.Net.WebSockets;
 
 namespace Project_PRN231.Controllers
 {
@@ -24,7 +23,7 @@ namespace Project_PRN231.Controllers
         [HttpPost]
         public async Task<ActionResult> UploadFile(List<IFormFile> files, int TaskId)
         {
-            if (files.Count == 0)
+            if (files.Count== 0)
             {
                 return BadRequest();
             }
@@ -112,17 +111,7 @@ namespace Project_PRN231.Controllers
                     }
                 }
             }
-
-            foreach (var item in listReportTask)
-            {
-                foreach (var i in db.Genres.ToList())
-                {
-                    if (item.Task.GenreId == i.Id)
-                    {
-                        item.Task.Genre = i;
-                    }
-                }
-            }
+           
             return Ok(listReportTask);
         }
 
@@ -134,44 +123,7 @@ namespace Project_PRN231.Controllers
             {
                 return NotFound();
             }
-            foreach (var item in db.Users.ToList())
-            {
-                if (item.Id == ReportTask.UserId)
-                {
-                    ReportTask.User= item;
-                    break;
-                }
-            }
-
             return Ok(ReportTask);
-        }
-
-        [HttpGet]
-        public IActionResult GetReportTaskByTaskId(int taskId)
-        {
-            var task = db.ReportTasks.FirstOrDefault(x => x.TaskId == taskId);
-            if (task == null)
-            {
-                return NotFound();
-            }
-
-            foreach (var item in db.AssignTasks.ToList())
-            {
-                if (item.Id == task.TaskId)
-                {
-                    task.Task = item;
-                }
-            }
-
-            foreach (var item in db.Users.ToList())
-            {
-                if (item.Id == task.UserId)
-                {
-                    task.User = item;
-                    break;
-                }
-            }
-            return Ok(task);
         }
 
         [HttpPost]
@@ -181,66 +133,16 @@ namespace Project_PRN231.Controllers
             return Ok("Insert Successfull!!!");
         }
 
-        public class UpdateClass
-        {
-            public string Content { get; set; }
-            public string Description { get; set; }
-            public int Id { get; set; }
-            public string Image { get; set; }
-            public bool IsChecked { get; set; }
-            public string Title { get; set; }
-
-        }
-
         [HttpPut]
-        public IActionResult UpdateReportTask(UpdateClass uC)
+        public IActionResult UpdateReportTask(ReportTask reportTask)
         {
-            var rT = reporterRepository.GetTaskById(uC.Id);
+            var rT = reporterRepository.GetTaskById(reportTask.Id);
             if (rT == null)
             {
-                return NotFound();
+                return NotFound();  
             }
-
-            if (uC.Title != null)
-            {
-                rT.Title = uC.Title;
-            }
-
-            if (uC.Description != null)
-            {
-                rT.Description = uC.Description;
-            }
-
-            if (uC.Content != null)
-            {
-                rT.Content = uC.Content;
-            }
-
-            if (uC.Image != null)
-            {
-                rT.Image = uC.Image;
-            }
-
-            if (uC.IsChecked != true)
-            {
-                uC.IsChecked = false;
-            }
-            reporterRepository.UpdateReportTask(rT);
+            reporterRepository.UpdateReportTask(rT);    
             return Ok("Update Successfull!!!");
-        }
-
-        [HttpPut] 
-        public IActionResult AcceptTask(int Id)
-        {
-            var tas = db.ReportTasks.FirstOrDefault(x => x.Id == Id);   
-            if (tas == null)
-            {
-                return NotFound();
-            }
-            tas.IsChecked = true;
-            db.Entry<ReportTask>(tas).State = EntityState.Modified;
-            db.SaveChanges();
-            return Ok();
         }
 
         [HttpDelete]
