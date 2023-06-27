@@ -109,6 +109,7 @@ namespace Project_PRN231.Controllers
             return Ok(currentPageData);
         }
 
+        /*
         [HttpGet]
         public IActionResult getNewsByDate(int begin, int end)
         {
@@ -119,5 +120,6 @@ namespace Project_PRN231.Controllers
             }
             return Ok(listNewsByDate);
         }
+        */
     }
 }
