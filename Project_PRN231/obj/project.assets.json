@@ -2877,19 +2877,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
+    "C:\\Users\\ngoba\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Visual Studio 2019\\Project_PRN231\\PRN231_ProjectBE\\Project_PRN231\\Project_PRN231.csproj",
+      "projectUniqueName": "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231_MERGE\\Project_PRN231\\Project_PRN231.csproj",
       "projectName": "Project_PRN231",
-      "projectPath": "E:\\Visual Studio 2019\\Project_PRN231\\PRN231_ProjectBE\\Project_PRN231\\Project_PRN231.csproj",
-      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "E:\\Visual Studio 2019\\Project_PRN231\\PRN231_ProjectBE\\Project_PRN231\\obj\\",
+      "projectPath": "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231_MERGE\\Project_PRN231\\Project_PRN231.csproj",
+      "packagesPath": "C:\\Users\\ngoba\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231_MERGE\\Project_PRN231\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ngoba\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
