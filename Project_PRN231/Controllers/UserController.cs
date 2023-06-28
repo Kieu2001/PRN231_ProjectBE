@@ -30,6 +30,18 @@ namespace Project_PRN231.Controllers
         {
             return Ok(user.GetUserById(id));
         }
+        [HttpGet]
+        public IActionResult GetUserRole(int id)
+        {
+            return Ok(user.GetUserRole(id));
+        }
+
+        [HttpPost]
+        public IActionResult InsertUser(User use)
+        {
+            user.InsertUser(use);
+            return Ok("Inserted Successfull!!!");
+        }
 
     }
 }

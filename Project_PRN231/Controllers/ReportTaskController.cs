@@ -126,6 +126,34 @@ namespace Project_PRN231.Controllers
             return Ok(ReportTask);
         }
 
+        [HttpGet]
+        public IActionResult GetReportTaskByTaskId(int taskId)
+        {
+            var task = db.ReportTasks.FirstOrDefault(x => x.TaskId == taskId);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            foreach (var item in db.AssignTasks.ToList())
+            {
+                if (item.Id == task.TaskId)
+                {
+                    task.Task = item;
+                }
+            }
+
+            //foreach (var item in db.Users.ToList())
+            //{
+            //    if (item.Id == task.UserId)
+            //    {
+            //        task.User = item;
+            //        break;
+            //    }
+            //}
+            return Ok(task);
+        }
+
         [HttpPost]
         public IActionResult InsertReportTask(ReportTask reportTask)
         {
