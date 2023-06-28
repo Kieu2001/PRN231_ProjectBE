@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Project_PRN231.Models;
 using Project_PRN231.Repositories;
 using Project_PRN231.Repositories.IRepository;
@@ -83,7 +83,6 @@ namespace Project_PRN231.Controllers
             return Ok("Delete Successfull!!!");
         }
 
-
         [HttpGet]
         public IActionResult getAllGenres()
         {
@@ -140,6 +139,5 @@ namespace Project_PRN231.Controllers
         //    }
         //    return Ok(listNewsByDate);
         //}
-
     }
 }

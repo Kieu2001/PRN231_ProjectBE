@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -39,9 +39,6 @@ namespace Project_PRN231.Controllers
         {
             try
             {
-
-
-
                 // kiểm tra thông tin đăng nhập
 
                 if (AuthenticateUser(login.Email, login.Password) != null)
