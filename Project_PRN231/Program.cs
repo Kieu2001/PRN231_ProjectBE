@@ -33,13 +33,7 @@ builder.Services.AddScoped<IReporterRepository, ReporterRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
-<<<<<<< HEAD
 
-=======
-//builder.Services.AddIdentity<User, Role>()
-//    .AddEntityFrameworkStores<PRN231_SUContext>();
-//Token
->>>>>>> main
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(option =>
     {
