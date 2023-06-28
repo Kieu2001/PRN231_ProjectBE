@@ -16,12 +16,12 @@ namespace Project_PRN231.Controllers
     {
         private IConfiguration _config;
         private readonly PRN231_SUContext db;
-        public LoginController(IConfiguration config, PRN231_SUContext _db)
+        public LoginController(IConfiguration config,PRN231_SUContext _db)
         {
             _config = config;
-            db = _db;
+            db= _db;
         }
-        private User AuthenticateUser(string email, string password)
+        private User AuthenticateUser(string email,string password)
         {
             User _user = db.Users.FirstOrDefault(x => x.Email.Equals(email) && x.Password.Equals(password));
 
@@ -39,6 +39,9 @@ namespace Project_PRN231.Controllers
         {
             try
             {
+
+
+
                 // kiểm tra thông tin đăng nhập
 
                 if (AuthenticateUser(login.Email, login.Password) != null)
@@ -68,6 +71,7 @@ namespace Project_PRN231.Controllers
             {
                 throw new Exception(ex.Message);
             }
+
 
 
             return Unauthorized();
