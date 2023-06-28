@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Project_PRN231.Models;
 using Project_PRN231.Repositories;
 using Project_PRN231.Repositories.IRepository;
@@ -128,8 +128,6 @@ namespace Project_PRN231.Controllers
             return Ok(newfirst);
         }
 
-
-        //[HttpGet]
         //public IActionResult getNewsByDate(int begin, int end)
         //{
         //    var listNewsByDate = newsRepository.GetNewsByDate(begin, end);

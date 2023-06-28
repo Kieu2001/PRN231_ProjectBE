@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231_MERGE\\Project_PRN231\\Project_PRN231.csproj": {}
+    "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231\\Project_PRN231\\Project_PRN231.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231_MERGE\\Project_PRN231\\Project_PRN231.csproj": {
+    "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231\\Project_PRN231\\Project_PRN231.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231_MERGE\\Project_PRN231\\Project_PRN231.csproj",
+        "projectUniqueName": "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231\\Project_PRN231\\Project_PRN231.csproj",
         "projectName": "Project_PRN231",
-        "projectPath": "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231_MERGE\\Project_PRN231\\Project_PRN231.csproj",
+        "projectPath": "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231\\Project_PRN231\\Project_PRN231.csproj",
         "packagesPath": "C:\\Users\\ngoba\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231_MERGE\\Project_PRN231\\obj\\",
+        "outputPath": "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231\\Project_PRN231\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ngoba\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -73,10 +73,6 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
-            },
-            "X.PagedList": {
-              "target": "Package",
-              "version": "[8.4.7, )"
             }
           },
           "imports": [

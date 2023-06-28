@@ -60,16 +60,80 @@ namespace Project_PRN231.DataAccess
         public IEnumerable<News> GetNewsByDate()
         {
             List<News> listNewsByDate = new List<News>();
+            //try
+            //{
+            //    var db = new PRN231_SUContext();
+            //    listNewsByDate = db.News.OrderBy(x=>x.CreateDate).ToList();
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new Exception(ex.Message);
+            //}
+            return listNewsByDate;
+        }
+        public IEnumerable<News> newsFirst()
+        {
             try
             {
-                var db = new PRN231_SUContext();
-                listNewsByDate = db.News.OrderBy(x=>x.CreateDate).ToList();
-            }
-            catch (Exception ex)
+            var db = new PRN231_SUContext(); 
+            var news = (from n in db.News
+                       orderby n.CreateDate descending
+                       select n).Take(1);
+            return news;
+            }catch(Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            return listNewsByDate;
+
+          
+        }
+        public IEnumerable<News> newsFirst()
+        {
+            try
+            {
+            var db = new PRN231_SUContext(); 
+            var news = (from n in db.News
+                       orderby n.CreateDate descending
+                       select n).Take(1);
+            return news;
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+          
+        }
+        public IEnumerable<News> newsFirst()
+        {
+            try
+            {
+            var db = new PRN231_SUContext(); 
+            var news = (from n in db.News
+                       orderby n.CreateDate descending
+                       select n).Take(1);
+            return news;
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+          
+        }
+        public IEnumerable<News> newsFirst()
+        {
+            try
+            {
+            var db = new PRN231_SUContext(); 
+            var news = (from n in db.News
+                       orderby n.CreateDate descending
+                       select n).Take(1);
+            return news;
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+          
         }
         public IEnumerable<News> newsFirst()
         {
@@ -137,47 +201,6 @@ namespace Project_PRN231.DataAccess
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }
-        }
-        public IEnumerable<Genre> GetAllGenres()
-        {
-            List<Genre> genres = new List<Genre>();
-            try 
-            {
-                var db = new PRN231_SUContext();
-                genres = db.Genres.ToList();
-               
-            }catch(Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            return genres;
-        }
-
-        public IEnumerable<News> GetNewsByGenreId(int id)
-        {
-            List<News> list = new List<News>();
-            try
-            {
-                var db = new PRN231_SUContext();
-                list = db.News.Where(x => x.GenreId == id).ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            return list;
-        }
-
-        public int GetNewsByDate(int begin, int end)
-        {
-            DateTime startDate = DateTime.Now.AddDays(-begin);
-            DateTime endDate = DateTime.Now.AddDays(-end);
-
-
-            using (var db = new PRN231_SUContext())
-            {
-                return db.News.Count(u => u.CreateDate >= endDate && u.CreateDate <= startDate);
             }
         }
     }
