@@ -5,6 +5,7 @@ namespace Project_PRN231.Models
 {
     public partial class AdvertisementOrder
     {
+
         public int Id { get; set; }
         public int? UserId { get; set; }
         public int? AdvertisementId { get; set; }

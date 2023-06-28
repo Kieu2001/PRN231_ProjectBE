@@ -135,6 +135,22 @@ namespace Project_PRN231.DataAccess
 
           
         }
+        public IEnumerable<News> newsFirst()
+        {
+            try
+            {
+            var db = new PRN231_SUContext(); 
+            var news = (from n in db.News
+                       orderby n.CreateDate descending
+                       select n).Take(1);
+            return news;
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+          
+        }
 
         public void AddNews(News news)
         {
