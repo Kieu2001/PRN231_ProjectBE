@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KlP5t3u1Mc5SEFUBY8qNc4myfzeFvF7kf+mobwpmuC3yFTqFi8R58o4GuDip5+QvKEveTRdXKVnGjLr6MiyH1A==",
+  "dgSpecHash": "7s8Pfn+KsC55ZREOtXNHkV0bpNQFw/dBPbup79cLUNznYgZf1niRatCWm5zH0ZCjK3qPlaloH4OMgms7iYo0Vw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231_MERGE\\Project_PRN231\\Project_PRN231.csproj",
+  "projectFilePath": "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231\\Project_PRN231\\Project_PRN231.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ngoba\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ngoba\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

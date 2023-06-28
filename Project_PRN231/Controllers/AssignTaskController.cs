@@ -25,6 +25,7 @@ namespace Project_PRN231.Controllers
 
         [HttpGet]
         //[Authorize]
+        //oke
         public async Task<IActionResult> GetAllAssignTask()
         {
             IEnumerable<AssignTask> lstAssignTask = new List<AssignTask>();
