@@ -113,7 +113,7 @@ namespace Project_PRN231.Controllers
         public IActionResult GetDataByDate(int page)
         {
             int pageSize = 2;
-            var allData = newsRepository.GetNewsByDate();
+            var allData = newsRepository.GetListNewsByDate();
             int startIndex = (page - 1) * pageSize;
             int endIndex = page * pageSize;
 
@@ -130,12 +130,12 @@ namespace Project_PRN231.Controllers
 
         //public IActionResult getNewsByDate(int begin, int end)
         //{
-        //    var listNewsByDate = newsRepository.GetNewsByDate(begin, end);
-        //    if (listNewsByDate == null)
+        //    var listnewsbydate = newsRepository.GetNewsByDate(begin, end);
+        //    if (listnewsbydate == null)
         //    {
         //        return NotFound();
         //    }
-        //    return Ok(listNewsByDate);
+        //    return Ok(listnewsbydate);
         //}
     }
 }
