@@ -57,7 +57,7 @@ namespace Project_PRN231.DataAccess
         }
 
 
-        public IEnumerable<News> GetNewsByDate()
+        public IEnumerable<News> GetListNewsByDate()
         {
             List<News> listNewsByDate = new List<News>();
             try
@@ -71,14 +71,13 @@ namespace Project_PRN231.DataAccess
             }
             return listNewsByDate;
         }
-        public IEnumerable<News> newsFirst()
+        public News newsFirst()
         {
             try
             {
-            var db = new PRN231_SUContext(); 
-            var news = (from n in db.News
-                       orderby n.CreateDate descending
-                       select n).Take(1);
+                News? news = null;
+            var db = new PRN231_SUContext();
+                news = db.News.OrderByDescending(x => x.CreateDate).FirstOrDefault();
             return news;
             }catch(Exception ex)
             {

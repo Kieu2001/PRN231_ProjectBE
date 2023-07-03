@@ -14,7 +14,7 @@ namespace Project_PRN231.Repositories
 
         public void Delete(News news) => NewsManagement.Instance.Delete(news);
 
-        public IEnumerable<News> GetNewsByDate() => NewsManagement.Instance.GetNewsByDate();
+        public IEnumerable<News> GetListNewsByDate() => NewsManagement.Instance.GetListNewsByDate();
 
         public int GetNewsByDate(int begin, int end) => NewsManagement.Instance.GetNewsByDate(begin, end);
 
@@ -28,9 +28,8 @@ namespace Project_PRN231.Repositories
 
         public IEnumerable<News> GetNewsByGenreId(int id) => NewsManagement.Instance.GetNewsByGenreId(id);
 
-        public IEnumerable<News> newsFirst() => NewsManagement.Instance.newsFirst();
+        public News newsFirst() => NewsManagement.Instance.newsFirst();
 
-        
-      
+       
     }
 }
