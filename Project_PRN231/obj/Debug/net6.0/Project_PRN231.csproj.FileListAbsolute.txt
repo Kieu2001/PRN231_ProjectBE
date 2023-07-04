@@ -298,3 +298,13 @@ C:\Users\ngoba\OneDrive\Máy tính\PRN231_ProjectBE\Project_PRN231\obj\Debug\net
 C:\Users\ngoba\OneDrive\Máy tính\PRN231_ProjectBE\Project_PRN231\obj\Debug\net6.0\Project_PRN231.pdb
 C:\Users\ngoba\OneDrive\Máy tính\PRN231_ProjectBE\Project_PRN231\obj\Debug\net6.0\Project_PRN231.genruntimeconfig.cache
 C:\Users\ngoba\OneDrive\Máy tính\PRN231_ProjectBE\Project_PRN231\obj\Debug\net6.0\ref\Project_PRN231.dll
+C:\Users\ngoba\OneDrive\Máy tính\PRN231\Project_PRN231\obj\Debug\net6.0\Project_PRN231.csproj.AssemblyReference.cache
+C:\Users\ngoba\OneDrive\Máy tính\PRN231\Project_PRN231\obj\Debug\net6.0\Project_PRN231.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ngoba\OneDrive\Máy tính\PRN231\Project_PRN231\obj\Debug\net6.0\Project_PRN231.AssemblyInfoInputs.cache
+C:\Users\ngoba\OneDrive\Máy tính\PRN231\Project_PRN231\obj\Debug\net6.0\Project_PRN231.AssemblyInfo.cs
+C:\Users\ngoba\OneDrive\Máy tính\PRN231\Project_PRN231\obj\Debug\net6.0\Project_PRN231.csproj.CoreCompileInputs.cache
+C:\Users\ngoba\OneDrive\Máy tính\PRN231\Project_PRN231\obj\Debug\net6.0\Project_PRN231.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\ngoba\OneDrive\Máy tính\PRN231\Project_PRN231\obj\Debug\net6.0\Project_PRN231.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ngoba\OneDrive\Máy tính\PRN231\Project_PRN231\obj\Debug\net6.0\Project_PRN231.dll
+C:\Users\ngoba\OneDrive\Máy tính\PRN231\Project_PRN231\obj\Debug\net6.0\refint\Project_PRN231.dll
+C:\Users\ngoba\OneDrive\Máy tính\PRN231\Project_PRN231\obj\Debug\net6.0\Project_PRN231.pdb
