@@ -6,5 +6,7 @@ namespace Project_PRN231.Repositories.IRepository
     {
         AdvertisementOrder GetAdvertisementOrderById(int Id);
         void InsertAdvertisementOrder(AdvertisementOrder advertisementOrder);
+        void UpdateAdvertisementOrder(AdvertisementOrder adOrder);
+        AdvertisementOrder GetAdOrderByOrder(DateTime date);
     }
 }
