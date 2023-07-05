@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Project_PRN231.Models;
 using Project_PRN231.Repositories.IRepository;
 
 namespace Project_PRN231.Controllers
@@ -30,11 +31,11 @@ namespace Project_PRN231.Controllers
         {
             return Ok(user.GetUserById(id));
         }
-        [HttpGet]
-        public IActionResult GetUserRole(int id)
-        {
-            return Ok(user.GetUserRole(id));
-        }
+        //[HttpGet]
+        //public IActionResult GetUserRole(int id)
+        //{
+        //    return Ok(user.GetUserRole(id));
+        //}
 
         [HttpPost]
         public IActionResult InsertUser(User use)
