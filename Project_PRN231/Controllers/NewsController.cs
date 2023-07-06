@@ -97,8 +97,22 @@ namespace Project_PRN231.Controllers
             if (list == null) return NotFound();
             return Ok(list);
         }
-        [HttpGet("data")]
-        public IActionResult GetData( int page )
+
+       
+
+        [HttpGet]
+        public IActionResult GetDataByDate(int page)
+        {
+            int pageSize = 2;
+            var allData = newsRepository.GetListNewsByDate();
+            int startIndex = (page - 1) * pageSize;
+            int endIndex = page * pageSize;
+            var currentPageData = allData.Skip(startIndex).Take(pageSize);
+            return Ok(currentPageData);
+        }
+
+        [HttpGet()]
+        public IActionResult GetData(int page)
         {
             int pageSize = 2;
             var allData = newsRepository.GetNewsList();
@@ -108,15 +122,33 @@ namespace Project_PRN231.Controllers
             var currentPageData = allData.Skip(startIndex).Take(pageSize);
             return Ok(currentPageData);
         }
-
         [HttpGet]
-        public IActionResult GetDataByDate(int page)
+        public IActionResult getNewByGenreFirst(int page)
         {
             int pageSize = 2;
-            var allData = newsRepository.GetListNewsByDate();
+            var allData = newsRepository.GetNewsByGenreId(1);
             int startIndex = (page - 1) * pageSize;
             int endIndex = page * pageSize;
-
+            var currentPageData = allData.Skip(startIndex).Take(pageSize);
+            return Ok(currentPageData);
+        }
+        [HttpGet]
+        public IActionResult getNewByGenreSecond(int page)
+        {
+            int pageSize = 2;
+            var allData = newsRepository.GetNewsByGenreId(2);
+            int startIndex = (page - 1) * pageSize;
+            int endIndex = page * pageSize;
+            var currentPageData = allData.Skip(startIndex).Take(pageSize);
+            return Ok(currentPageData);
+        }
+        [HttpGet]
+        public IActionResult getNewByGenreThree(int page)
+        {
+            int pageSize = 2;
+            var allData = newsRepository.GetNewsByGenreId(3);
+            int startIndex = (page - 1) * pageSize;
+            int endIndex = page * pageSize;
             var currentPageData = allData.Skip(startIndex).Take(pageSize);
             return Ok(currentPageData);
         }
