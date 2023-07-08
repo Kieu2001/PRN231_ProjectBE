@@ -2814,19 +2814,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ngoba\\.nuget\\packages\\": {}
+    "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231\\Project_PRN231\\Project_PRN231.csproj",
+      "projectUniqueName": "E:\\Visual Studio 2019\\Project_PRN231\\PRN231_ProjectBE\\Project_PRN231\\Project_PRN231.csproj",
       "projectName": "Project_PRN231",
-      "projectPath": "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231\\Project_PRN231\\Project_PRN231.csproj",
-      "packagesPath": "C:\\Users\\ngoba\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231\\Project_PRN231\\obj\\",
+      "projectPath": "E:\\Visual Studio 2019\\Project_PRN231\\PRN231_ProjectBE\\Project_PRN231\\Project_PRN231.csproj",
+      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+      "outputPath": "E:\\Visual Studio 2019\\Project_PRN231\\PRN231_ProjectBE\\Project_PRN231\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ngoba\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2909,13 +2909,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\ngoba\\OneDrive\\Máy tính\\PRN231\\Project_PRN231\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }
