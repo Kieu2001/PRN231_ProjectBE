@@ -244,7 +244,36 @@ namespace Project_PRN231.DataAccess
                 return db.News.Count(u => u.CreateDate >= endDate && u.CreateDate <= startDate);
             }
         }
-        public void AddNewsSave(NewsSeen newsSave)
+       
+        public NewsSeen getNewsSeenById(int? userId , int? newsId)
+        {
+            NewsSeen? news = null;
+            try
+            {
+                var db = new PRN231_SUContext();
+                news = db.NewsSeens.FirstOrDefault(x=> x.UserId == userId && x.NewsId == newsId );
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return news;
+        }
+        public NewsSeen getNewsSeen(int? userId, int? newsId)
+        {
+            NewsSeen? news = null;
+            try
+            {
+                var db = new PRN231_SUContext();
+                news = db.NewsSeens.FirstOrDefault(x => x.UserId == userId && x.NewsId == newsId && x.CateId != 1);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return news;
+        }
+
+        public void AddNewsSeen(NewsSeen newsSave)
         {
             try
             {
@@ -257,7 +286,7 @@ namespace Project_PRN231.DataAccess
             }
         }
 
-        public IEnumerable<NewsDTO> GetNewsUserSeen(int userId)
+        public IEnumerable<NewsDTO> GetNewsUserSeen(int userId, int cateId)
         {
             List<NewsDTO> list = new List<NewsDTO>();
             try
@@ -266,7 +295,7 @@ namespace Project_PRN231.DataAccess
                 {
                     list = (from n in db.News
                             join ns in db.NewsSeens on n.Id equals ns.NewsId
-                            where ns.UserId == userId
+                            where ns.UserId == userId && ns.CateId == cateId
                             select new NewsDTO
                             {
                                 Id= n.Id,
