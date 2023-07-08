@@ -106,6 +106,14 @@ namespace Project_PRN231.Controllers
                 {
                     if (i.Id == item.TaskId)
                     {
+                        
+                        foreach (var k in db.Genres.ToList())
+                        {
+                            if (k.Id == i.GenreId)
+                            {
+                                i.Genre = k;
+                            }
+                        }
                         item.Task = i;
                         break;
                     }

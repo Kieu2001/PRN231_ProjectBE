@@ -54,9 +54,6 @@ namespace Project_PRN231.DataAccess
             return userList;
         }
 
-
-
-
         public int GetUserData(int numberOfDays)
         {
             DateTime startDate = DateTime.Now.AddDays(-numberOfDays);
