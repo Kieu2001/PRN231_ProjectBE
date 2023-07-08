@@ -25,6 +25,13 @@ namespace Project_PRN231.Controllers
                 {
                     if (i.Id == item.TaskId)
                     {
+                        foreach (var k in db.Genres.ToList())
+                        {
+                            if (k.Id == i.GenreId)
+                            {
+                                i.Genre = k;
+                            }
+                        }
                         item.Task = i;
                         break;
                     }
@@ -65,18 +72,40 @@ namespace Project_PRN231.Controllers
             return Ok("Insert Successfull!!!");
         }
 
-        [HttpPut]
-        public IActionResult UpdateWritingTask(WritingTask writingTask)
+        public class UpdateContentWritingTask
         {
-            var wT = writerRepository.GetWritingTaskById(writingTask.Id);
-            if (wT == null)
+            public int Id { get; set; }
+            public string Title { get; set; }
+            public string Description { get; set; } 
+            public string Content { get; set; }
+            public string Image { get; set; }
+            public string Comment { get; set; }
+            public bool IsChecked { get; set; } 
+        }
+
+        [HttpPut]
+        public IActionResult UpdateWritingTask(UpdateContentWritingTask writingTask)
+        {
+            try
             {
-                return NotFound();
+                var wT = writerRepository.GetWritingTaskById(writingTask.Id);
+                if (wT == null)
+                {
+                    return NotFound();
+                }
+                wT.Title = writingTask.Title;
+                wT.Id = writingTask.Id;
+                wT.Description = writingTask.Description;
+                wT.Content = writingTask.Content;
+                wT.Image = writingTask.Image;
+                wT.Comment= writingTask.Comment;
+                wT.IsChecked = writingTask.IsChecked;
+                writerRepository.UpdateWritingTask(wT);
+                return Ok("Update Successfull!!!");
+            } catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
-            //New Change
-            
-            writerRepository.UpdateWritingTask(wT);
-            return Ok("Update Successfull!!!");
         }
 
         [HttpDelete]
