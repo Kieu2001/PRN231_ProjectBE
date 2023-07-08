@@ -68,6 +68,16 @@ namespace Project_PRN231.Models
                 entity.Property(e => e.IsPending).HasColumnName("isPending");
 
                 entity.Property(e => e.Title).HasMaxLength(50);
+
+                entity.HasOne(d => d.Advertisement)
+                    .WithMany(p => p.AdvertisementOrders)
+                    .HasForeignKey(d => d.AdvertisementId)
+                    .HasConstraintName("FK_AdvertisementOrder_Advertisement");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AdvertisementOrders)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_AdvertisementOrder_User");
             });
 
             modelBuilder.Entity<AssignTask>(entity =>
@@ -93,22 +103,22 @@ namespace Project_PRN231.Models
                 entity.HasOne(d => d.Genre)
                     .WithMany(p => p.AssignTasks)
                     .HasForeignKey(d => d.GenreId)
-                    .HasConstraintName("FK__AssignTas__Genre__3D5E1FD2");
+                    .HasConstraintName("FK__AssignTas__Genre__4AB81AF0");
 
                 entity.HasOne(d => d.Leader)
                     .WithMany(p => p.AssignTaskLeaders)
                     .HasForeignKey(d => d.LeaderId)
-                    .HasConstraintName("FK__AssignTas__Leade__3E52440B");
+                    .HasConstraintName("FK__AssignTas__Leade__47DBAE45");
 
                 entity.HasOne(d => d.Reporter)
                     .WithMany(p => p.AssignTaskReporters)
                     .HasForeignKey(d => d.ReporterId)
-                    .HasConstraintName("FK__AssignTas__Repor__3F466844");
+                    .HasConstraintName("FK__AssignTas__Repor__49C3F6B7");
 
                 entity.HasOne(d => d.Writer)
                     .WithMany(p => p.AssignTaskWriters)
                     .HasForeignKey(d => d.WriterId)
-                    .HasConstraintName("FK__AssignTas__Write__403A8C7D");
+                    .HasConstraintName("FK__AssignTas__Write__48CFD27E");
             });
 
             modelBuilder.Entity<CategoriesNewsSeen>(entity =>
@@ -135,12 +145,12 @@ namespace Project_PRN231.Models
                 entity.HasOne(d => d.News)
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.NewsId)
-                    .HasConstraintName("FK__Comment__News_Id__412EB0B6");
+                    .HasConstraintName("FK__Comment__News_Id__5629CD9C");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__Comment__User_Id__4222D4EF");
+                    .HasConstraintName("FK__Comment__User_Id__5535A963");
             });
 
             modelBuilder.Entity<Document>(entity =>
@@ -154,7 +164,7 @@ namespace Project_PRN231.Models
                 entity.HasOne(d => d.Task)
                     .WithMany(p => p.Documents)
                     .HasForeignKey(d => d.TaskId)
-                    .HasConstraintName("FK__Document__TaskId__4316F928");
+                    .HasConstraintName("FK__Document__TaskId__71D1E811");
             });
 
             modelBuilder.Entity<Genre>(entity =>
@@ -187,7 +197,7 @@ namespace Project_PRN231.Models
                 entity.HasOne(d => d.Genre)
                     .WithMany(p => p.News)
                     .HasForeignKey(d => d.GenreId)
-                    .HasConstraintName("FK__News__Genre_Id__440B1D61");
+                    .HasConstraintName("FK__News__Genre_Id__3E52440B");
             });
 
             modelBuilder.Entity<NewsSeen>(entity =>
@@ -210,12 +220,12 @@ namespace Project_PRN231.Models
                 entity.HasOne(d => d.News)
                     .WithMany(p => p.NewsSeens)
                     .HasForeignKey(d => d.NewsId)
-                    .HasConstraintName("FK__NewsSeen__News_I__45F365D3");
+                    .HasConstraintName("FK__NewsSeen__News_I__440B1D61");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.NewsSeens)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__NewsSeen__User_I__46E78A0C");
+                    .HasConstraintName("FK__NewsSeen__User_I__4316F928");
             });
 
             modelBuilder.Entity<RejectGenre>(entity =>
@@ -234,23 +244,23 @@ namespace Project_PRN231.Models
                 entity.HasOne(d => d.Reject)
                     .WithMany(p => p.RejectTasks)
                     .HasForeignKey(d => d.RejectId)
-                    .HasConstraintName("FK__RejectTas__Rejec__47DBAE45");
+                    .HasConstraintName("FK__RejectTas__Rejec__04E4BC85");
 
                 entity.HasOne(d => d.Task)
                     .WithMany(p => p.RejectTasks)
                     .HasForeignKey(d => d.TaskId)
-                    .HasConstraintName("FK__RejectTas__TaskI__48CFD27E");
+                    .HasConstraintName("FK__RejectTas__TaskI__05D8E0BE");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.RejectTasks)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__RejectTas__UserI__49C3F6B7");
+                    .HasConstraintName("FK__RejectTas__UserI__06CD04F7");
             });
 
             modelBuilder.Entity<ReplyComment>(entity =>
             {
                 entity.HasKey(e => new { e.CommentId, e.UserId })
-                    .HasName("PK__ReplyCom__8BFACDCC299F03C3");
+                    .HasName("PK__ReplyCom__8BFACDCC206444FD");
 
                 entity.ToTable("ReplyComment");
 
@@ -266,13 +276,13 @@ namespace Project_PRN231.Models
                     .WithMany(p => p.ReplyComments)
                     .HasForeignKey(d => d.CommentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__ReplyComm__Comme__4AB81AF0");
+                    .HasConstraintName("FK__ReplyComm__Comme__59063A47");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.ReplyComments)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__ReplyComm__User___4BAC3F29");
+                    .HasConstraintName("FK__ReplyComm__User___59FA5E80");
             });
 
             modelBuilder.Entity<ReportTask>(entity =>
@@ -284,6 +294,8 @@ namespace Project_PRN231.Models
                 entity.Property(e => e.CreateDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Description).HasMaxLength(3000);
+
+                entity.Property(e => e.EndDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Image).HasMaxLength(1000);
 
@@ -300,12 +312,12 @@ namespace Project_PRN231.Models
                 entity.HasOne(d => d.Task)
                     .WithMany(p => p.ReportTasks)
                     .HasForeignKey(d => d.TaskId)
-                    .HasConstraintName("FK__ReportTas__Task___4CA06362");
+                    .HasConstraintName("FK__ReportTas__Task___52593CB8");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.ReportTasks)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__ReportTas__User___4D94879B");
+                    .HasConstraintName("FK__ReportTas__User___5165187F");
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -340,7 +352,7 @@ namespace Project_PRN231.Models
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("FK__User__Role_Id__4E88ABD4");
+                    .HasConstraintName("FK__User__Role_Id__398D8EEE");
             });
 
             modelBuilder.Entity<WritingTask>(entity =>
@@ -354,6 +366,8 @@ namespace Project_PRN231.Models
                 entity.Property(e => e.CreateDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Description).HasMaxLength(3000);
+
+                entity.Property(e => e.EndDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Image).HasMaxLength(1000);
 
@@ -370,12 +384,12 @@ namespace Project_PRN231.Models
                 entity.HasOne(d => d.Task)
                     .WithMany(p => p.WritingTasks)
                     .HasForeignKey(d => d.TaskId)
-                    .HasConstraintName("FK__WritingTa__Task___4F7CD00D");
+                    .HasConstraintName("FK__WritingTa__Task___4E88ABD4");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.WritingTasks)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__WritingTa__User___5070F446");
+                    .HasConstraintName("FK__WritingTa__User___4D94879B");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -30,7 +30,7 @@ namespace Project_PRN231.DataAccess
             {
                 var db = new PRN231_SUContext();
                 //list = db.AssignTasks.ToList();
-                list = db.AssignTasks.ToList();
+                list = db.AssignTasks.Where(x => x.IsDeleted == false).ToList();
             }
             catch (Exception ex)
             {

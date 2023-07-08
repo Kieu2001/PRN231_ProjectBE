@@ -14,6 +14,7 @@ namespace Project_PRN231.Models
         public int Id { get; set; }
         public string GenreName { get; set; } = null!;
         public string? Description { get; set; }
+        public bool? IsDeleted { get; set; }
 
         public virtual ICollection<AssignTask> AssignTasks { get; set; }
         public virtual ICollection<News> News { get; set; }

@@ -52,6 +52,20 @@ namespace Project_PRN231.DataAccess
             return rp;
         }
 
+        public List<ReportTask> GetReportTaskByUserId(int Id)
+        {
+            List<ReportTask> listReport = new List<ReportTask>();
+            try
+            {
+                var db = new PRN231_SUContext();
+                listReport = db.ReportTasks.Where(x => x.UserId == Id).ToList();
+            } catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return listReport;
+        }
+
         public void AddNew(ReportTask reportTask)
         {
             try

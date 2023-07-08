@@ -126,7 +126,7 @@ namespace Project_PRN231.Controllers
         [HttpGet]
         public IActionResult GetAllAssignTaskByWriterId(int writerId)
         {
-            var lstAssignForWriter = db.AssignTasks.Where(x => x.WriterId == writerId && x.IsWriterAccept == false).ToList();
+            var lstAssignForWriter = db.AssignTasks.Where(x => x.WriterId == writerId && (x.IsWriterAccept == false || x.IsWriterAccept == null)).ToList();
             if (lstAssignForWriter.Count == 0)
             {
                 return NotFound();
@@ -170,6 +170,75 @@ namespace Project_PRN231.Controllers
             return Ok("Insert Successfull!!!");
         }
 
+        public class ResponseAccept
+        {
+            public int Id { get; set; }
+            public string RoleName { get; set; }
+            public bool IsAccept { get; set; }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> AcceptTask (ResponseAccept res)
+        {
+            var task = assignTask.GetAssignTaskById(res.Id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                if (res.RoleName == "Writer")
+                {
+                    task.IsWriterAccept= true;
+                } 
+
+                if (res.RoleName == "Reporter")
+                {
+                    task.IsReportAccept = true;
+                }
+
+                db.Entry<AssignTask>(task).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                await db.SaveChangesAsync();
+                return new JsonResult("Update Successfull!!!");
+            } catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> RejectTask (ResponseAccept res)
+        {
+            var task = assignTask.GetAssignTaskById(res.Id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                if (res.RoleName == "Writer")
+                {
+                    task.IsWriterAccept = false;
+                }
+
+                if (res.RoleName == "Reporter")
+                {
+                    task.IsReportAccept = false;
+                }
+
+                db.Entry<AssignTask>(task).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                await db.SaveChangesAsync();
+                return new JsonResult("Reject Successfull!!!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPut]
         //[Authorize]
         public async Task<IActionResult> UpdateAssignTask(AssignTask asTask)
@@ -183,17 +252,25 @@ namespace Project_PRN231.Controllers
             return Ok("Update Successfull!!!");
         }
 
-        [HttpDelete]
+        [HttpPut]
         //[Authorize]
-        public async Task<IActionResult> DeleteAssignTask(AssignTask asTask)
+        public async Task<IActionResult> DeleteAssignTask(int Id)
         {
-            var aT = assignTask.GetAssignTaskById(asTask.Id);
+            var aT = assignTask.GetAssignTaskById(Id);
             if (aT == null)
             {
                 return NotFound();
             }
-            assignTask.DeleteAssignTask(asTask);
-            return Ok("Delete Successfull!!!");
+            try
+            {
+                aT.IsDeleted = true;
+                db.Entry<AssignTask>(aT).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                await db.SaveChangesAsync();
+                return new JsonResult("Delete Successfull!!!");
+            } catch (Exception ex)
+            {
+                return new JsonResult(new { StatusCodes.Status400BadRequest, ex.Message});
+            }
         }
 
     }

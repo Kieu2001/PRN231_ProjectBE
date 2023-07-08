@@ -17,6 +17,9 @@ namespace Project_PRN231.Models
         public bool? IsChecked { get; set; }
         public int? UserId { get; set; }
         public int? TaskId { get; set; }
+        public bool? IsDeleted { get; set; }
+        public DateTime? EndDate { get; set; }
+        public bool? IsLated { get; set; }
 
         public virtual AssignTask? Task { get; set; }
         public virtual User? User { get; set; }

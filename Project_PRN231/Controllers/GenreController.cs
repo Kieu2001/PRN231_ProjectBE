@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project_PRN231.Models;
 using Project_PRN231.Repositories.IRepository;
+using System.Threading.Tasks.Dataflow;
 
 namespace Project_PRN231.Controllers
 {
@@ -10,13 +11,15 @@ namespace Project_PRN231.Controllers
     [ApiController]
     public class GenreController : ControllerBase
     {
+        private readonly PRN231_SUContext db;
         private readonly IGenreRepository gen;
         private readonly IMapper _mapper;
 
-        public GenreController(IGenreRepository trackRepository, IMapper mapper)
+        public GenreController(IGenreRepository trackRepository, IMapper mapper, PRN231_SUContext db)
         {
             gen = trackRepository;
             _mapper = mapper;
+            this.db = db;
         }
 
         [HttpGet]
@@ -44,16 +47,24 @@ namespace Project_PRN231.Controllers
             return Ok("Update Successfull!!!");
         }
 
-        [HttpDelete]
-        public IActionResult DeleteGenre(Genre genre)
+        [HttpPut]
+        public async Task<IActionResult> DeleteGenre(int Id)
         {
-            var g = gen.GetGenreById(genre.Id);
+            var g = gen.GetGenreById(Id);
             if (g == null)
             {
                 return NotFound();
             }
-            gen.DeleteGenre(genre);
-            return Ok();
+            try
+            {
+                g.IsDeleted = true;
+                db.Entry<Genre>(g).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                await db.SaveChangesAsync();
+                return new JsonResult("Delete Successfull!!!");
+            } catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

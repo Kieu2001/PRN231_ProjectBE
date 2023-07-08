@@ -10,6 +10,8 @@ namespace Project_PRN231.Repositories
 
         public IEnumerable<ReportTask> GetAllTask() => ReporterManagement.Instance.GetReportTaskList();
 
+        public List<ReportTask> GetReportTaskByUserId(int Id) => ReporterManagement.Instance.GetReportTaskByUserId(Id);
+
         public ReportTask GetTaskById(int Id) => ReporterManagement.Instance.GetReportTaskById(Id);
 
         public void InsertReportTask(ReportTask reportTask) => ReporterManagement.Instance.AddNew(reportTask);
