@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Project_PRN231.Models;
+using Project_PRN231.Repositories;
 using Project_PRN231.Repositories.IRepository;
 
 namespace Project_PRN231.Controllers
@@ -124,6 +125,12 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> GetReportTaskByUserId(int Id)
+        {
+            return Ok(reporterRepository.GetReportTaskByUserId(Id));
+        }
+
+        [HttpGet]
         public IActionResult GetReportTaskById(int Id)
         {
             var ReportTask = reporterRepository.GetTaskById(Id);
@@ -151,14 +158,6 @@ namespace Project_PRN231.Controllers
                 }
             }
 
-            //foreach (var item in db.Users.ToList())
-            //{
-            //    if (item.Id == task.UserId)
-            //    {
-            //        task.User = item;
-            //        break;
-            //    }
-            //}
             return Ok(task);
         }
 
@@ -172,25 +171,71 @@ namespace Project_PRN231.Controllers
         [HttpPut]
         public IActionResult UpdateReportTask(ReportTask reportTask)
         {
-            var rT = reporterRepository.GetTaskById(reportTask.Id);
-            if (rT == null)
+            try
             {
-                return NotFound();  
+                var rT = reporterRepository.GetTaskById(reportTask.Id);
+                if (rT == null)
+                {
+                    return NotFound();
+                }
+                rT.Title = reportTask.Title;
+                rT.Id = reportTask.Id;
+                rT.Description = reportTask.Description;
+                rT.Content = reportTask.Content;
+                rT.Image = reportTask.Image;
+                rT.IsChecked = reportTask.IsChecked;
+                reporterRepository.UpdateReportTask(rT);
+                return Ok("Update Successfull!!!");
             }
-            reporterRepository.UpdateReportTask(rT);    
-            return Ok("Update Successfull!!!");
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        [HttpDelete]
-        public IActionResult DeleteReportTask(int Id)
+        [HttpPut]
+        public async Task<IActionResult> CheckDeadLine(int taskId, string IsLated)
         {
-            var rT = reporterRepository.GetTaskById(Id);
-            if (rT == null)
+            var task = await db.ReportTasks.FirstOrDefaultAsync(x => x.Id == taskId);
+            if (task != null)
+            {
+                try
+                {
+                    if (IsLated == "true")
+                    {
+                        task.IsLated = true;
+                    }
+                    db.Entry<ReportTask>(task).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    return Ok("Update Successfull!!!");
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
+            return NotFound();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> DeleteReportTask(int Id)
+        {
+            var reportTask = reporterRepository.GetTaskById(Id);
+            if (reportTask == null)
             {
                 return NotFound();
             }
-            reporterRepository.DeleteReportTask(rT);
-            return Ok("Delete Successfull!!!");
+            try
+            {
+                reportTask.IsDeleted = true;
+                db.Entry<ReportTask>(reportTask).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return Ok("Delete Successfull!!!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
 

@@ -7,6 +7,7 @@ namespace Project_PRN231.Models
     {
         public User()
         {
+            AdvertisementOrders = new HashSet<AdvertisementOrder>();
             AssignTaskLeaders = new HashSet<AssignTask>();
             AssignTaskReporters = new HashSet<AssignTask>();
             AssignTaskWriters = new HashSet<AssignTask>();
@@ -30,6 +31,7 @@ namespace Project_PRN231.Models
         public string? Image { get; set; }
 
         public virtual Role? Role { get; set; }
+        public virtual ICollection<AdvertisementOrder> AdvertisementOrders { get; set; }
         public virtual ICollection<AssignTask> AssignTaskLeaders { get; set; }
         public virtual ICollection<AssignTask> AssignTaskReporters { get; set; }
         public virtual ICollection<AssignTask> AssignTaskWriters { get; set; }

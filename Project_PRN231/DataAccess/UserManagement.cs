@@ -24,6 +24,21 @@ namespace Project_PRN231.DataAccess
             }
         }
 
+        public IEnumerable<User> GetUser()
+        {
+            List<User> userList = new List<User>();
+            try
+            {
+                var db = new PRN231_SUContext();
+                userList = db.Users.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return userList;
+        }
+
         public IEnumerable<UserDTO> GetUserList()
         {
             List<UserDTO> userList = new List<UserDTO>();

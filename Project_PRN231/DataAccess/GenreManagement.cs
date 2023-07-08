@@ -28,8 +28,7 @@ namespace Project_PRN231.DataAccess
             try
             {
                 var db = new PRN231_SUContext();
-                //list = db.AssignTasks.ToList();
-                list = db.Genres.ToList();
+                list = db.Genres.Where(x => x.IsDeleted == false).ToList();
             }
             catch (Exception ex)
             {

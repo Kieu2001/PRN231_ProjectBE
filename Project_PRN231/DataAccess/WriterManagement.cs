@@ -53,6 +53,19 @@ namespace Project_PRN231.DataAccess
             return rp;
         }
 
+        public List<WritingTask> GetWritingTaskByUserId(int Id)
+        {
+            List<WritingTask> listWriting = new List<WritingTask>();
+            try
+            {
+                var db = new PRN231_SUContext();
+                listWriting = db.WritingTasks.Where(x => x.UserId == Id).ToList();
+            } catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return listWriting;
+        }
         public void AddNew(WritingTask writingTask)
         {
             try

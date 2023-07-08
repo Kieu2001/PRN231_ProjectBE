@@ -12,6 +12,8 @@ namespace Project_PRN231.Repositories
 
         public WritingTask GetWritingTaskById(int Id) => WriterManagement.Instance.GetWritingTaskById(Id);
 
+        public List<WritingTask> GetWritingTasksByUserId(int Id) => WriterManagement.Instance.GetWritingTaskByUserId(Id);
+
         public void InsertWritingTask(WritingTask writingTask) => WriterManagement.Instance.AddNew(writingTask);
 
         public void UpdateWritingTask(WritingTask writingTask) => WriterManagement.Instance.Update(writingTask);    
