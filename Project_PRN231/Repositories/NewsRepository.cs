@@ -1,4 +1,5 @@
 ﻿using Project_PRN231.DataAccess;
+using Project_PRN231.DTO;
 using Project_PRN231.Models;
 using Project_PRN231.Repositories.IRepository;
 using System;
@@ -29,6 +30,13 @@ namespace Project_PRN231.Repositories
 
         public News newsFirst() => NewsManagement.Instance.newsFirst();
 
-       
+        public IEnumerable<NewsDTO> GetNewsUserSeen(int userId,int cateId) => NewsManagement.Instance.GetNewsUserSeen(userId , cateId);
+
+        public void AddNewsSeen(NewsSeen newsSave) => NewsManagement.Instance.AddNewsSeen(newsSave);
+
+        public NewsSeen getNewsSeenById(int? userId, int? newsId) => NewsManagement.Instance.getNewsSeenById(userId, newsId);
+
+        public NewsSeen getNewsSeen(int? userId, int? newsId) => NewsManagement.Instance.getNewsSeen(userId, newsId);
+
     }
 }

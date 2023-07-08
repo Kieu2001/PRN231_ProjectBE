@@ -244,5 +244,79 @@ namespace Project_PRN231.DataAccess
                 return db.News.Count(u => u.CreateDate >= endDate && u.CreateDate <= startDate);
             }
         }
+       
+        public NewsSeen getNewsSeenById(int? userId , int? newsId)
+        {
+            NewsSeen? news = null;
+            try
+            {
+                var db = new PRN231_SUContext();
+                news = db.NewsSeens.FirstOrDefault(x=> x.UserId == userId && x.NewsId == newsId );
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return news;
+        }
+        public NewsSeen getNewsSeen(int? userId, int? newsId)
+        {
+            NewsSeen? news = null;
+            try
+            {
+                var db = new PRN231_SUContext();
+                news = db.NewsSeens.FirstOrDefault(x => x.UserId == userId && x.NewsId == newsId && x.CateId != 1);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return news;
+        }
+
+        public void AddNewsSeen(NewsSeen newsSave)
+        {
+            try
+            {
+                var db = new PRN231_SUContext();
+                db.NewsSeens.Add(newsSave);
+                db.SaveChanges();
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public IEnumerable<NewsDTO> GetNewsUserSeen(int userId, int cateId)
+        {
+            List<NewsDTO> list = new List<NewsDTO>();
+            try
+            {
+                using ( var db = new PRN231_SUContext())
+                {
+                    list = (from n in db.News
+                            join ns in db.NewsSeens on n.Id equals ns.NewsId
+                            where ns.UserId == userId && ns.CateId == cateId
+                            select new NewsDTO
+                            {
+                                Id= n.Id,
+                                Content= n.Content,
+                                CreateBy= n.CreateBy,
+                                CreateDate= n.CreateDate,
+                                Description= n.Description,
+                                Entered= n.Entered,
+                                GenreId= n.GenreId,
+                                Image= n.Image,
+                                Title= n.Title, 
+                                UpdateBy= n.UpdateBy,   
+                                UpdateDate= n.UpdateDate,
+                            }).ToList();
+                }
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return list;
+        }
     }
 }

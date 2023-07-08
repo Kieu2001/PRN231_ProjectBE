@@ -160,6 +160,35 @@ namespace Project_PRN231.Controllers
             return Ok(newfirst);
         }
 
-       
+        [HttpGet]
+        public IActionResult getNewsUserSeen(int userId,int rateId) 
+        {
+            var newSeen = newsRepository.GetNewsUserSeen(userId,rateId);
+
+            return Ok(newSeen);
+            
+        }
+        [HttpPost]
+        public IActionResult AddNewsSeen(NewsSeen newsSeen)
+        {
+            var checknews = newsRepository.getNewsSeenById(newsSeen.UserId, newsSeen.NewsId);
+            if(checknews != null)
+            {
+               return NotFound();
+            }
+            newsRepository.AddNewsSeen(newsSeen);
+            return Ok();
+        }
+        [HttpPost]
+        public IActionResult AddNewsSave(NewsSeen newsSeen)
+        {
+            var checknews = newsRepository.getNewsSeen(newsSeen.UserId, newsSeen.NewsId);
+            if (checknews != null)
+            {
+                return NotFound();
+            }
+            newsRepository.AddNewsSeen(newsSeen);
+            return Ok();
+        }
     }
 }
