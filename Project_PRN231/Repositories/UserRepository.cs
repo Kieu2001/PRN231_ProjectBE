@@ -10,7 +10,7 @@ namespace Project_PRN231.Repositories
         public void DeleteUser(User user) => UserManagement.Instance.Delete(user);
         public IEnumerable<UserDTO> GetAllUser() => UserManagement.Instance.GetUserList();
 
-        public IEnumerable<User> GetAllUser() => (IEnumerable<User>)UserManagement.Instance.GetUserList();
+        //public IEnumerable<User> GetAllUser() => (IEnumerable<User>)UserManagement.Instance.GetUserList();
 
         public User GetUserById(int Id) => UserManagement.Instance.GetUserById(Id);
 

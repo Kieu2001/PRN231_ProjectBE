@@ -79,8 +79,6 @@ namespace Project_PRN231.DataAccess
             }
         }
 
-
-
         public IEnumerable<UserDTO> GetUserListBan(Boolean Ban)
         {
             List<UserDTO> userList = new List<UserDTO>();
