@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Visual Studio 2019\\Project_PRN231\\PRN231_ProjectBE\\Project_PRN231\\Project_PRN231.csproj": {}
+    "C:\\Users\\ngoba\\OneDrive\\Máy tính\\update2\\Project_PRN231\\Project_PRN231.csproj": {}
   },
   "projects": {
-    "E:\\Visual Studio 2019\\Project_PRN231\\PRN231_ProjectBE\\Project_PRN231\\Project_PRN231.csproj": {
+    "C:\\Users\\ngoba\\OneDrive\\Máy tính\\update2\\Project_PRN231\\Project_PRN231.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Visual Studio 2019\\Project_PRN231\\PRN231_ProjectBE\\Project_PRN231\\Project_PRN231.csproj",
+        "projectUniqueName": "C:\\Users\\ngoba\\OneDrive\\Máy tính\\update2\\Project_PRN231\\Project_PRN231.csproj",
         "projectName": "Project_PRN231",
-        "projectPath": "E:\\Visual Studio 2019\\Project_PRN231\\PRN231_ProjectBE\\Project_PRN231\\Project_PRN231.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "E:\\Visual Studio 2019\\Project_PRN231\\PRN231_ProjectBE\\Project_PRN231\\obj\\",
+        "projectPath": "C:\\Users\\ngoba\\OneDrive\\Máy tính\\update2\\Project_PRN231\\Project_PRN231.csproj",
+        "packagesPath": "C:\\Users\\ngoba\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ngoba\\OneDrive\\Máy tính\\update2\\Project_PRN231\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ngoba\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[12.0.1, )"
             },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.16, )"
@@ -70,6 +74,10 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
@@ -81,8 +89,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -94,7 +101,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.314\\RuntimeIdentifierGraph.json"
         }
       }
     }
