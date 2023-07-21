@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project_PRN231.Models;
 using Project_PRN231.Repositories.IRepository;
+using System.Data;
 
 namespace Project_PRN231.Controllers
 {
@@ -19,6 +22,7 @@ namespace Project_PRN231.Controllers
             _env = env;
         }
         [HttpGet]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Writing")]
         public IActionResult GetAllWritingTask()
         {
             var listWritingTask = writerRepository.GetAllWritingTask();
@@ -44,6 +48,7 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpGet]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Writing")]
         public async Task<IActionResult> GetWritingByUserId(int Id)
         {
             try
@@ -58,12 +63,14 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpGet]
+       // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Writing")]
         public IActionResult GetWritingTaskById(int Id)
         {
             return Ok();
         }
 
         [HttpGet]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Writing")]
         public IActionResult GetWritingTaskByTaskId(int taskId)
         {
             var wT = db.WritingTasks.FirstOrDefault(x => x.TaskId == taskId);
@@ -83,6 +90,7 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpPost]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Writing")]
         public IActionResult InsertWritingTask(WritingTask writingTask)
         {
             writerRepository.InsertWritingTask(writingTask);
@@ -90,6 +98,7 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpPost]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Writing")]
         public JsonResult SaveFile()
         {
             try
@@ -125,6 +134,7 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpPut]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Writing")]
         public IActionResult UpdateWritingTask(UpdateContentWritingTask writingTask)
         {
             try
@@ -151,6 +161,7 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpPut]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Writing")]
         public async Task<IActionResult> CheckDeadLine(int taskId, string IsLated)
         {
             var task = await db.WritingTasks.FirstOrDefaultAsync(x => x.Id == taskId);
@@ -175,6 +186,7 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpPut]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Writing")]
         public async Task<IActionResult> DeleteWritingTask(int Id)
         {
             var writingTask = writerRepository.GetWritingTaskById(Id);

@@ -13,6 +13,7 @@ namespace Project_PRN231.Models
         public int Id { get; set; }
         public decimal? Price { get; set; }
         public int? TotalDate { get; set; }
+        public bool? IsDelete { get; set; }
 
         public virtual ICollection<AdvertisementOrder> AdvertisementOrders { get; set; }
     }

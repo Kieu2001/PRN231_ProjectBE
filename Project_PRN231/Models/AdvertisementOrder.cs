@@ -16,6 +16,7 @@ namespace Project_PRN231.Models
         public bool? IsPending { get; set; }
         public bool? IsApprove { get; set; }
         public int? Discount { get; set; }
+        public bool? IsDelete { get; set; }
 
         public virtual Advertisement? Advertisement { get; set; }
         public virtual User? User { get; set; }
