@@ -20,8 +20,20 @@ namespace Project_PRN231.DTO
         public int? Entered { get; set; }
         public int? GenreId { get; set; }
 
-        public virtual Genre? Genre { get; set; }
-        public virtual ICollection<Comment> Comments { get; set; }
-        public virtual ICollection<NewsSeen> NewsSeens { get; set; }
+        //public virtual Genre? Genre { get; set; }
+        //public virtual ICollection<Comment> Comments { get; set; }
+        //public virtual ICollection<NewsSeen> NewsSeens { get; set; }
+    }
+    public class NewsSeenDTO
+    {
+        public int Id { get; set; }
+        public DateTime? AddDate { get; set; }
+        public int? UserId { get; set; }
+        public int? NewsId { get; set; }
+        public int? CateId { get; set; }
+
+        //public virtual Genre? Genre { get; set; }
+        //public virtual ICollection<Comment> Comments { get; set; }
+        //public virtual ICollection<NewsSeen> NewsSeens { get; set; }
     }
 }
