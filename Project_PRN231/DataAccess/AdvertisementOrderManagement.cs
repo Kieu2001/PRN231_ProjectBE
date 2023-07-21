@@ -1,4 +1,5 @@
-﻿using Project_PRN231.Models;
+﻿using Project_PRN231.DTO;
+using Project_PRN231.Models;
 
 namespace Project_PRN231.DataAccess
 {
@@ -50,6 +51,39 @@ namespace Project_PRN231.DataAccess
             }
             return rp;
         }
+
+        public IEnumerable<AdvertisementOrderDTO> GetAdOrderByApprove()
+        {
+            List<AdvertisementOrderDTO> list = new List<AdvertisementOrderDTO>();
+            try
+            {
+                var db = new PRN231_SUContext();
+                list = (from c in db.AdvertisementOrders
+                        join a in db.Advertisements on c.AdvertisementId equals a.Id
+                        join u in db.Users on c.UserId equals u.Id
+                        where c.IsApprove == false
+                        select new AdvertisementOrderDTO
+                        {
+                            Id = c.Id,
+                            Username = u.FullName,
+                            Title = c.Title,
+                            Image = c.Image,
+                            AdType = (long)a.Price,
+                            CreatedDate = (DateTime)c.CreatedDate,
+                            EndDate = (DateTime)c.EndDate,
+                            Description = c.Description
+
+                        }
+                        ).ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return list;
+        }
+
         public void AddAdvertisement(AdvertisementOrder ad)
         {
             try
@@ -97,5 +131,26 @@ namespace Project_PRN231.DataAccess
             }
         }
 
+        public void Delete(int id)
+        {
+            try
+            {
+                AdvertisementOrder rp = GetAdOrderById(id);
+                if (rp != null)
+                {
+                    var db = new PRN231_SUContext();
+                    db.AdvertisementOrders.Remove(rp);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("This AdOrder does not exist.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
