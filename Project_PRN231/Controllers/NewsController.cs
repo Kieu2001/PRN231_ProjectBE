@@ -190,5 +190,16 @@ namespace Project_PRN231.Controllers
             newsRepository.AddNewsSeen(newsSeen);
             return Ok();
         }
+
+        [HttpGet]
+        public IActionResult getNewsByDate2(int begin, int end)
+        {
+            var listNewsByDate = newsRepository.GetNewsByDate2(begin, end);
+            if (listNewsByDate == null)
+            {
+                return NotFound();
+            }
+            return Ok(listNewsByDate);
+        }
     }
 }
