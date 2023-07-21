@@ -25,6 +25,8 @@ namespace Project_PRN231.Models
         public virtual DbSet<Genre> Genres { get; set; } = null!;
         public virtual DbSet<News> News { get; set; } = null!;
         public virtual DbSet<NewsSeen> NewsSeens { get; set; } = null!;
+        public virtual DbSet<Notification> Notifications { get; set; } = null!;
+        public virtual DbSet<NotificationCate> NotificationCates { get; set; } = null!;
         public virtual DbSet<RejectGenre> RejectGenres { get; set; } = null!;
         public virtual DbSet<RejectTask> RejectTasks { get; set; } = null!;
         public virtual DbSet<ReplyComment> ReplyComments { get; set; } = null!;
@@ -226,6 +228,32 @@ namespace Project_PRN231.Models
                     .WithMany(p => p.NewsSeens)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK__NewsSeen__User_I__4316F928");
+            });
+
+            modelBuilder.Entity<Notification>(entity =>
+            {
+                entity.ToTable("Notification");
+
+                entity.Property(e => e.CateId).HasColumnName("Cate_Id");
+
+                entity.Property(e => e.Message).HasMaxLength(500);
+
+                entity.HasOne(d => d.Cate)
+                    .WithMany(p => p.Notifications)
+                    .HasForeignKey(d => d.CateId)
+                    .HasConstraintName("FK__Notificat__Cate___2BFE89A6");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Notifications)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK__Notificat__UserI__2B0A656D");
+            });
+
+            modelBuilder.Entity<NotificationCate>(entity =>
+            {
+                entity.ToTable("Notification_Cate");
+
+                entity.Property(e => e.Title).HasMaxLength(300);
             });
 
             modelBuilder.Entity<RejectGenre>(entity =>
