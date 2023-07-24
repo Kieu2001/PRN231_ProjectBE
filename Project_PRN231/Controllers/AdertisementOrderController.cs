@@ -101,6 +101,11 @@ namespace Project_PRN231.Controllers
             AdOrder.DeletetAdvertisementOrder(id);
             return Ok();
         }
+        [HttpGet]
+        public IActionResult GetAdertisementOrderByUser(int userId)
+        {
+            return Ok(AdOrder.advertisementOrdersByUserId(userId));
+        }
     }
 
 }

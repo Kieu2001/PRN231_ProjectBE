@@ -27,5 +27,6 @@ namespace Project_PRN231.Repositories.IRepository
         void UnLikeComment(int newid);
         int CountLike(int id);
         IEnumerable<News> GetNewsByName(string name);
+
     }
 }
