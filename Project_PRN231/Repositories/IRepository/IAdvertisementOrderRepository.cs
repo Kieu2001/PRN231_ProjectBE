@@ -11,5 +11,6 @@ namespace Project_PRN231.Repositories.IRepository
         AdvertisementOrder GetAdOrderByOrder(DateTime date);
         IEnumerable<AdvertisementOrderDTO> GetAdOrderByApprove();
         void DeletetAdvertisementOrder(int id);
+        IEnumerable<AdvertisementOrder> advertisementOrdersByUserId(int id);
     }
 }

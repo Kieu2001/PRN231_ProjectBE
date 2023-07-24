@@ -37,6 +37,13 @@ namespace Project_PRN231.DataAccess
             }
             return rp;
         }
+        public IEnumerable<AdvertisementOrder> advertisementOrdersByUserId(int id)
+        {
+            var db = new PRN231_SUContext();
+            List<AdvertisementOrder> listA = db.AdvertisementOrders.Where(x => x.UserId == id).ToList();
+
+            return listA;
+        }
         public AdvertisementOrder GetAdOrderByOrder(DateTime date)
         {
             AdvertisementOrder? rp = null;
