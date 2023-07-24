@@ -84,6 +84,7 @@ namespace Project_PRN231.DataAccess
                 if (rp != null)
                 {
                     var db = new PRN231_SUContext();
+                    assignTask.IsDeleted = false;
                     db.Entry<AssignTask>(assignTask).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     db.SaveChanges();
                 }
@@ -106,6 +107,7 @@ namespace Project_PRN231.DataAccess
                 if (rp != null)
                 {
                     var db = new PRN231_SUContext();
+                    rp.IsDeleted = true;   
                     db.AssignTasks.Remove(assignTask);
                     db.SaveChanges();
                 }
