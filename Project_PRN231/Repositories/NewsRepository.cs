@@ -38,5 +38,17 @@ namespace Project_PRN231.Repositories
 
         public NewsSeen getNewsSeen(int? userId, int? newsId) => NewsManagement.Instance.getNewsSeen(userId, newsId);
 
+        public void AddComment(Comment con) => NewsManagement.Instance.AddComment(con);
+
+        public IEnumerable<CommentDTO1> GetCommentByNewId(int id) => NewsManagement.Instance.GetCommentByNewId(id);
+
+        public void LikeComment(int newid) => NewsManagement.Instance.LikeComment(newid);
+
+        public void UnLikeComment(int newid) => NewsManagement.Instance.UnLikeComment(newid);
+
+        public int CountLike(int id) => NewsManagement.Instance.CountLike(id);
+
+        public IEnumerable<News> GetNewsByName(string name) => NewsManagement.Instance.GetNewsByName(name);
+        
     }
 }

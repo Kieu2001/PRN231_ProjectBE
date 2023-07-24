@@ -9,6 +9,7 @@ using Project_PRN231.Repositories.IRepository;
 using System.Net;
 using System.Reflection.Metadata;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace Project_PRN231.Controllers
 {
@@ -19,13 +20,14 @@ namespace Project_PRN231.Controllers
         private readonly IUserRepository user;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _env;
+        private readonly PRN231_SUContext db;
 
-
-        public UserController(IUserRepository trackRepository, IMapper mapper, IWebHostEnvironment env)
+        public UserController(IUserRepository trackRepository, IMapper mapper, IWebHostEnvironment env, PRN231_SUContext _db)
         {
             user = trackRepository;
             _mapper = mapper;
             _env = env;
+            db = _db;
         }
 
         [HttpGet]
@@ -46,7 +48,18 @@ namespace Project_PRN231.Controllers
         [HttpGet]
         public IActionResult GetUserById(int id)
         {
-            return Ok(user.GetUserById(id));
+            var user = db.Users.FirstOrDefault(x => x.Id == id);
+            if (user != null)
+            {
+                foreach (var item in db.Roles.ToList())
+                {
+                    if (item.Id == user.RoleId)
+                    {
+                        user.Role = item;
+                    }
+                }
+            }
+            return Ok(user);
         }
         [HttpGet]
         public IActionResult GetUserRole(int id)
@@ -144,8 +157,26 @@ namespace Project_PRN231.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> GetUserByEmail(string email)
+        {
+            var list = await db.Users.Where(x => x.Email.Contains(email)).ToListAsync();
+            if (list != null)
+            {
+                foreach (var item in list)
+                {
+                    foreach (var i in db.Roles.ToList())
+                    {
+                        if (i.Id == item.RoleId)
+                        {
+                            item.Role = i;
+                        }
+
+
+                    }
+                }
+            }
+            return Ok(list);
+        }
     }
-
-
 }
-

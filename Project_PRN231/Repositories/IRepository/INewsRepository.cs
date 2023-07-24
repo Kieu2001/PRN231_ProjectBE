@@ -20,5 +20,11 @@ namespace Project_PRN231.Repositories.IRepository
         void AddNewsSeen(NewsSeen newsSave);
         NewsSeen getNewsSeenById(int? userId, int? newsId);
         NewsSeen getNewsSeen(int? userId, int? newsId);
+        void AddComment(Comment con);
+        IEnumerable<CommentDTO1> GetCommentByNewId(int id);
+        void LikeComment(int newid);
+        void UnLikeComment(int newid);
+        int CountLike(int id);
+        IEnumerable<News> GetNewsByName(string name);
     }
 }

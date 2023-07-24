@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Project_PRN231.Models;
 using Project_PRN231.Repositories;
 using Project_PRN231.Repositories.IRepository;
@@ -90,13 +91,7 @@ namespace Project_PRN231.Controllers
             if(listGenre == null)  return NotFound();
             return Ok(listGenre);
         }
-        [HttpGet]
-        public IActionResult getNewByGenreId(int id)
-        {
-            var list = newsRepository.GetNewsByGenreId(id);
-            if (list == null) return NotFound();
-            return Ok(list);
-        }
+        
 
        
 
@@ -122,6 +117,19 @@ namespace Project_PRN231.Controllers
             var currentPageData = allData.Skip(startIndex).Take(pageSize);
             return Ok(currentPageData);
         }
+        [HttpGet]
+        public IActionResult getNewByGenreId(int page,int id)
+        {
+            int pageSize = 2;
+            var allData = newsRepository.GetNewsByGenreId(id);
+            int startIndex = (page - 1) * pageSize;
+            int endIndex = page * pageSize;
+            //var list = newsRepository.GetNewsByGenreId(id);
+            //if (list == null) return NotFound();
+            var currentPageData = allData.Skip(startIndex).Take(pageSize);
+            return Ok(currentPageData);
+        }
+
         [HttpGet]
         public IActionResult getNewByGenreFirst(int page)
         {
@@ -168,6 +176,7 @@ namespace Project_PRN231.Controllers
             return Ok(newSeen);
             
         }
+
         [HttpPost]
         public IActionResult AddNewsSeen(NewsSeen newsSeen)
         {
@@ -189,6 +198,50 @@ namespace Project_PRN231.Controllers
             }
             newsRepository.AddNewsSeen(newsSeen);
             return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult AddComment(Comment comment)
+        {
+            newsRepository.AddComment(comment);
+            return Ok();
+        }
+
+        [HttpGet]
+        public IActionResult GetListComment(int id)
+        {
+            var list = newsRepository.GetCommentByNewId(id);
+            return Ok(list);
+        }
+
+        [HttpPut]
+        public IActionResult LikeComment(int id)
+        {
+            newsRepository.LikeComment(id);
+            return Ok();
+        }
+        [HttpPut]
+        public IActionResult UnLikeComment(int id)
+        {
+            newsRepository.UnLikeComment(id);
+            return Ok();
+        }
+        [HttpGet]
+        public IActionResult CountLike(int id)
+        {
+            return Ok(newsRepository.CountLike(id));
+        }
+        [HttpGet]
+        public IActionResult SearchNews(int page ,string namenews)
+        {
+            int pageSize = 2;
+            var allData = newsRepository.GetNewsByName(namenews);
+            int startIndex = (page - 1) * pageSize;
+            int endIndex = page * pageSize;
+            //var list = newsRepository.GetNewsByGenreId(id);
+            //if (list == null) return NotFound();
+            var currentPageData = allData.Skip(startIndex).Take(pageSize);
+            return Ok(currentPageData);
         }
     }
 }

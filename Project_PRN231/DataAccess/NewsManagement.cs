@@ -1,9 +1,11 @@
-﻿using Project_PRN231.DTO;
+﻿using Microsoft.EntityFrameworkCore;
+using Project_PRN231.DTO;
 using Project_PRN231.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Project_PRN231.DataAccess
 {
@@ -317,6 +319,97 @@ namespace Project_PRN231.DataAccess
             }
 
             return list;
+        }
+
+        public void AddComment(Comment con)
+        {
+            try
+            {
+                var db = new PRN231_SUContext();
+                db.Comments.Add(con);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public IEnumerable<CommentDTO1> GetCommentByNewId(int id)
+        {
+            List<CommentDTO1> list = new List<CommentDTO1>();
+            try
+            {
+                var db = new PRN231_SUContext();
+                var l = db.Comments.Include(i => i.User).Where(i => i.NewsId == id).ToList();
+                var user = db.Users.ToList();
+                foreach (var item in l)
+                {
+                    CommentDTO1 cd = new CommentDTO1
+                    {
+                        Id = item.Id,
+                        NewsId = item.NewsId,
+                        UserName = item.User.FullName,
+                        Content = item.Content,
+                        CreateDate = item.CreateDate,
+                        IsActive = item.IsActive,
+                        LikeAmount = item.LikeAmount
+                     };
+                    list.Add(cd);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return list;
+        }
+        public void DeleteComment(int id)
+        {
+            Comment comment = null;
+            try
+            {
+                var db = new PRN231_SUContext();
+                comment = db.Comments.Where(x=>x.Equals(id)).FirstOrDefault();
+                db.Comments.Remove(comment);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void LikeComment(int newid)
+        {
+            var db = new PRN231_SUContext();
+            var newc = db.Comments.Where(x=>x.Id == newid).FirstOrDefault();
+            
+            newc.LikeAmount = newc.LikeAmount + 1;
+            db.Entry<Comment>(newc).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+        public void UnLikeComment(int newid)
+        {
+            var db = new PRN231_SUContext();
+            var newc = db.Comments.Where(x => x.Id == newid).FirstOrDefault();
+
+            newc.LikeAmount = newc.LikeAmount - 1;
+            db.Entry<Comment>(newc).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+        public int CountLike(int id)
+        {
+            var db = new PRN231_SUContext();                                
+            int n = (int)db.Comments.Where(x => x.Id == id).Select(x => x.LikeAmount).FirstOrDefault();
+            return n;
+        }
+        public IEnumerable<News> GetNewsByName(string name)
+        {
+            List<News> news = new List<News>();
+
+            var db = new PRN231_SUContext();
+            news = db.News.Where(x=>x.Title.ToLower().Contains(name)).ToList();
+            return news;
         }
     }
 }

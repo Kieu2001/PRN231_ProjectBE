@@ -56,7 +56,7 @@ namespace Project_PRN231.Controllers
                 new Claim("id", user.Id.ToString()),
                 new Claim("roleid", user.RoleId.ToString()),
                 new Claim("fullname", user.FullName),
-                new Claim("role_name",role.RoleName),
+                new Claim(ClaimTypes.Role,role.RoleName),
 
                 // thêm các claim khác tùy ý
             };
