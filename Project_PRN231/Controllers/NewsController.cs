@@ -200,6 +200,7 @@ namespace Project_PRN231.Controllers
             return Ok();
         }
 
+
         [HttpPost]
         public IActionResult AddComment(Comment comment)
         {
@@ -232,7 +233,7 @@ namespace Project_PRN231.Controllers
             return Ok(newsRepository.CountLike(id));
         }
         [HttpGet]
-        public IActionResult SearchNews(int page ,string namenews)
+        public IActionResult SearchNews(int page, string namenews)
         {
             int pageSize = 2;
             var allData = newsRepository.GetNewsByName(namenews);
@@ -242,6 +243,17 @@ namespace Project_PRN231.Controllers
             //if (list == null) return NotFound();
             var currentPageData = allData.Skip(startIndex).Take(pageSize);
             return Ok(currentPageData);
+        }
+        [HttpGet]
+        public IActionResult getNewsByDate2(int begin, int end)
+        {
+            var listNewsByDate = newsRepository.GetNewsByDate2(begin, end);
+            if (listNewsByDate == null)
+            {
+                return NotFound();
+            }
+            return Ok(listNewsByDate);
+
         }
     }
 }
