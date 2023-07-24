@@ -7,6 +7,10 @@ namespace Project_PRN231.Repositories
 {
     public class AdvertisementOrderRepository : IAdvertisementOrderRepository
     {
+        public IEnumerable<AdvertisementOrder> advertisementOrdersByUserId(int id) => AdvertisementOrderManagement.Instance.advertisementOrdersByUserId(id);
+
+
+
         public void DeletetAdvertisementOrder(int id) => AdvertisementOrderManagement.Instance.Delete(id);
 
         public IEnumerable<AdvertisementOrderDTO> GetAdOrderByApprove() => AdvertisementOrderManagement.Instance.GetAdOrderByApprove();
