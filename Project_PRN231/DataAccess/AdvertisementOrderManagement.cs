@@ -66,12 +66,14 @@ namespace Project_PRN231.DataAccess
                         {
                             Id = c.Id,
                             Username = u.FullName,
+                            UserId = u.Id,
                             Title = c.Title,
                             Image = c.Image,
                             AdType = (long)a.Price,
                             CreatedDate = (DateTime)c.CreatedDate,
                             EndDate = (DateTime)c.EndDate,
                             Description = c.Description
+
 
                         }
                         ).ToList();

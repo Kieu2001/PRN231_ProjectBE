@@ -2,8 +2,9 @@
 {
     public class AdvertisementOrderDTO
     {
-        public   int Id { get; set; }
+        public int Id { get; set; }
         public string Username { get; set; }
+        public int UserId { get; set; }
         public string Title { get; set; }
         public string Image { get; set; }
         public long AdType { get; set; }
