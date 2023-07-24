@@ -321,6 +321,7 @@ namespace Project_PRN231.DataAccess
             return list;
         }
 
+<<<<<<< HEAD
         public void AddComment(Comment con)
         {
             try
@@ -410,6 +411,38 @@ namespace Project_PRN231.DataAccess
             var db = new PRN231_SUContext();
             news = db.News.Where(x=>x.Title.ToLower().Contains(name)).ToList();
             return news;
+
+        public IEnumerable<News> GetNewsByDate2(int begin, int end)
+        {
+            List<News> listNews = new List<News>();
+            try
+            {
+                using (var db = new PRN231_SUContext()) // Tạo mới đối tượng PRN231_SUContext và sử dụng nó
+                {
+                    // Lấy ngày hiện tại
+                    DateTime currentDate = DateTime.Now;
+
+                    // Tính ngày bắt đầu và kết thúc
+                    DateTime startDate = currentDate.AddDays(-begin); // Lấy ngày bắt đầu trong ngày (00:00:00)
+                    DateTime endDate = currentDate.AddDays(-end); // Lấy ngày kết thúc trong ngày (00:00:00)
+
+                    // Truy vấn danh sách các tin tức có CreateDate nằm trong khoảng startDate và endDate
+                    listNews = db.News.Where(x => x.CreateDate >= endDate && x.CreateDate <= startDate)
+                                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Ghi log lỗi hoặc xử lý ngoại lệ ở đây (tùy vào yêu cầu ứng dụng của bạn)
+                // Ví dụ: Console.WriteLine(ex.Message);
+                // Hoặc: Logger.LogError(ex, "Lỗi trong quá trình lấy tin tức theo ngày.");
+
+                // Trả về danh sách tin tức trống trong trường hợp xảy ra lỗi
+                return new List<News>();
+            }
+
+            return listNews;
+
         }
     }
 }

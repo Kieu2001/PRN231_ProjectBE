@@ -12,6 +12,7 @@ namespace Project_PRN231.Repositories.IRepository
         void AddNews(News news);
         void Update(News news);
         void Delete(News news);
+        IEnumerable<News> GetNewsByDate2(int begin, int end);
 
         IEnumerable<Genre> GetAllGenres();
         IEnumerable<News> GetNewsByGenreId(int id);

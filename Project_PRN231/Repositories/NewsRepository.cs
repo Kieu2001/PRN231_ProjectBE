@@ -23,6 +23,7 @@ namespace Project_PRN231.Repositories
 
         public void Update(News news) => NewsManagement.Instance.Update(news);
 
+        public IEnumerable<News> GetNewsByDate2(int begin, int end) => NewsManagement.Instance.GetNewsByDate2(begin, end);
 
         public IEnumerable<Genre> GetAllGenres() => NewsManagement.Instance.GetAllGenres();
 
