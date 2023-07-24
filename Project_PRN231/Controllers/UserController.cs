@@ -10,6 +10,8 @@ using System.Net;
 using System.Reflection.Metadata;
 using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Project_PRN231.Controllers
 {
@@ -31,6 +33,9 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpGet]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Leader")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Writing")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Reporter")]
         public IActionResult GetAllUser()
         {
             var lstUser = user.GetAllUser();

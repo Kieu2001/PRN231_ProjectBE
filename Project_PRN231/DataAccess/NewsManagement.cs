@@ -157,10 +157,9 @@ namespace Project_PRN231.DataAccess
         {
             try {
                 News news1 = getNewsById(news.Id);
-                if (news1 != null)
-                {
+                if(news1 == null) {
                     var db = new PRN231_SUContext();
-                    db.News.Add(news1);
+                    db.News.Add(news);
                     db.SaveChanges();
                 }
             } catch (Exception ex)
@@ -321,8 +320,7 @@ namespace Project_PRN231.DataAccess
 
             return list;
         }
-
-
+      
         public void AddComment(Comment con)
         {
             try
@@ -413,7 +411,8 @@ namespace Project_PRN231.DataAccess
             var db = new PRN231_SUContext();
             news = db.News.Where(x => x.Title.ToLower().Contains(name)).ToList();
             return news;
-        } 
+        }
+      
         public IEnumerable<News> GetNewsByDate2(int begin, int end)
         {
             List<News> listNews = new List<News>();
@@ -445,8 +444,6 @@ namespace Project_PRN231.DataAccess
 
             return listNews;
 
-        }
-
-        
+        }     
     }
 }

@@ -194,6 +194,20 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpPut]
+        public async Task<IActionResult> AcceptTask(int Id)
+        {
+            var repo = await db.ReportTasks.FirstOrDefaultAsync(x => x.Id == Id);
+            if (repo == null)
+            {
+                return NotFound();
+            }
+            repo.IsChecked = true;
+            db.Entry<ReportTask>(repo).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+            return new JsonResult("Accecpt Successfull!!!");
+        }
+
+        [HttpPut]
         public async Task<IActionResult> CheckDeadLine(int taskId, string IsLated)
         {
             var task = await db.ReportTasks.FirstOrDefaultAsync(x => x.Id == taskId);

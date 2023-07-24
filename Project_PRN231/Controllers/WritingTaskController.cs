@@ -161,6 +161,21 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpPut]
+        public async Task<IActionResult> AcceptToPublic(int Id)
+        {
+            var wri = await db.WritingTasks.FirstOrDefaultAsync(x => x.Id== Id);
+            if (wri == null)
+            {
+                return NotFound();
+            }
+
+            wri.IsChecked = true;
+            db.Entry<WritingTask>(wri).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+            return new JsonResult("Accept successfull!!!");
+        }
+
+        [HttpPut]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Writing")]
         public async Task<IActionResult> CheckDeadLine(int taskId, string IsLated)
         {
