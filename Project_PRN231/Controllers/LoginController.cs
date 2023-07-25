@@ -29,19 +29,12 @@ namespace Project_PRN231.Controllers
         }
 
 
-
-
-
-
         [HttpPost]
 
         public IActionResult Login(LoginDTO login)
         {
             try
             {
-
-
-
                 // kiểm tra thông tin đăng nhập
 
                 if (AuthenticateUser(login.Email, login.Password) != null)
@@ -60,8 +53,6 @@ namespace Project_PRN231.Controllers
 
                 // thêm các claim khác tùy ý
             };
-
-
                     var token = GenerateToken(claims);
 
                     return Ok(new { token });
@@ -76,9 +67,6 @@ namespace Project_PRN231.Controllers
 
             return Unauthorized();
         }
-
-
-
 
         private string GenerateToken(Claim[] claims)
         {
