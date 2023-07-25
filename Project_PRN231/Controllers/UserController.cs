@@ -66,6 +66,34 @@ namespace Project_PRN231.Controllers
             }
             return Ok(user);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> GetUserByEmail(string email, string fullname)
+        {
+            if (email != null)
+            {
+                var use = await db.Users.FirstOrDefaultAsync(x => x.Email == email);
+                if (use == null)
+                {
+                    User a = new User
+                    {
+                        Email = email,
+                        FullName = fullname,
+                        CreateDate = DateTime.Now,
+                        RoleId = 2
+                    };
+                    db.Users.Add(a);
+                    await db.SaveChangesAsync();
+                    return new JsonResult("Add new account");
+
+                } 
+                return new JsonResult("Already Exits");
+            }
+            return new JsonResult("");     
+        }
+
+
+
         [HttpGet]
         public IActionResult GetUserRole(int id)
         {
@@ -76,6 +104,18 @@ namespace Project_PRN231.Controllers
         {
             user.InsertUser(use);
             return Ok("Inserted Successfull!!!");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LoginByGoogleOrFaceBook(string email)
+        {
+            var use = await db.Users.FirstOrDefaultAsync(x => x.Email == email);
+            if (use == null)
+            {
+                
+                return Ok();
+            }
+            return Ok(use);
         }
 
         [HttpPost]
