@@ -160,22 +160,44 @@ namespace Project_PRN231.DataAccess
             }
             return rp;
         }
+        public User GetUserByEmail(string email)
+        {
+            User? rp = null;
+            try
+            {
+                var db = new PRN231_SUContext();
+                rp = db.Users.SingleOrDefault(x => x.Email.Equals(email));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return rp;
+        }
 
 
         public void AddNew(User user)
         {
             try
             {
-                User rp = GetUserById(user.Id);
+                User rp = GetUserByEmail(user.Email);
                 if (rp == null)
                 {
                     var db = new PRN231_SUContext();
-                    db.Users.Add(user);
+                    User u = new User
+                    {
+                        FullName = user.FullName,
+                        Address = user.Address,
+                        Email = user.Email,
+                        Password = user.Password,
+                        Phone = user.Phone,
+                        RoleId = 2,
+                        CreateDate = DateTime.Now,
+                        IsBan = false,
+                        Image = null,
+                    };
+                    db.Users.Add(u);
                     db.SaveChanges();
-                }
-                else
-                {
-                    throw new Exception("This user is already done");
                 }
             }
             catch (Exception ex)

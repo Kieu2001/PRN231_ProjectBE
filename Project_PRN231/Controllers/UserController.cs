@@ -49,7 +49,7 @@ namespace Project_PRN231.Controllers
             var lstUser = user.GetUserListBan(Ban);
             return Ok(lstUser);
         }
-
+       
         [HttpGet]
         public IActionResult GetUserById(int id)
         {
@@ -98,12 +98,17 @@ namespace Project_PRN231.Controllers
         [HttpGet]
         public IActionResult GetUserRole(int id)
         {
-            return Ok(user.GetUserRole(id));
+            return Ok(user.GetUserRole(id));     
         }
         [HttpPost]
         public IActionResult InsertUser(User use)
         {
-            user.InsertUser(use);
+           var a = user.GetUserByEmail(use.Email);
+            if(a != null)
+            {
+                return NotFound();
+            } user.InsertUser(use);
+           
             return Ok("Inserted Successfull!!!");
         }
 
@@ -170,7 +175,6 @@ namespace Project_PRN231.Controllers
         {
             try
             {
-
                 User g = user.GetUserById(id);
 
                 if (g != null)
@@ -221,6 +225,10 @@ namespace Project_PRN231.Controllers
 
                     }
                 }
+            }
+            else
+            {
+                return NotFound();
             }
             return Ok(list);
         }
