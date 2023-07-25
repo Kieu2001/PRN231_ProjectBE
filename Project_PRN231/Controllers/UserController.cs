@@ -84,10 +84,11 @@ namespace Project_PRN231.Controllers
                     };
                     db.Users.Add(a);
                     await db.SaveChangesAsync();
-                    return new JsonResult("Add new account");
+                    var id = await db.Users.OrderBy(x => x.Id).LastOrDefaultAsync();
+                    return new JsonResult(id.Id);
 
                 } 
-                return new JsonResult("Already Exits");
+                return new JsonResult(use.Id);
             }
             return new JsonResult("");     
         }

@@ -169,7 +169,7 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpGet]
-        public IActionResult getNewsUserSeen(int userId,int rateId) 
+        public IActionResult getNewsUserSeen(string userId,int rateId) 
         {
             var newSeen = newsRepository.GetNewsUserSeen(userId,rateId);
 

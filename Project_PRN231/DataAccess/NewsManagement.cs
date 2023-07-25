@@ -13,6 +13,7 @@ namespace Project_PRN231.DataAccess
     {
         private static NewsManagement instance = null;
         private static readonly object instanceLock = new object();
+        //private PRN231_SUContext db;
         private NewsManagement() { }
 
         public static NewsManagement Instance
@@ -62,81 +63,9 @@ namespace Project_PRN231.DataAccess
         public IEnumerable<News> GetListNewsByDate()
         {
             List<News> listNewsByDate = new List<News>();
-            //try
-            //{
-            //    var db = new PRN231_SUContext();
-            //    listNewsByDate = db.News.OrderBy(x=>x.CreateDate).ToList();
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw new Exception(ex.Message);
-            //}
             return listNewsByDate;
         }
-        //public IEnumerable<News> newsFirst()
-        //{
-        //    try
-        //    {
-        //    var db = new PRN231_SUContext(); 
-        //    var news = (from n in db.News
-        //               orderby n.CreateDate descending
-        //               select n).Take(1);
-        //    return news;
-        //    }catch(Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-
-
-        //}
-        //public IEnumerable<News> newsFirst()
-        //{
-        //    try
-        //    {
-        //    var db = new PRN231_SUContext(); 
-        //    var news = (from n in db.News
-        //               orderby n.CreateDate descending
-        //               select n).Take(1);
-        //    return news;
-        //    }catch(Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-
-
-        //}
-        //public IEnumerable<News> newsFirst()
-        //{
-        //    try
-        //    {
-        //    var db = new PRN231_SUContext(); 
-        //    var news = (from n in db.News
-        //               orderby n.CreateDate descending
-        //               select n).Take(1);
-        //    return news;
-        //    }catch(Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-
-
-        //}
-        //public IEnumerable<News> newsFirst()
-        //{
-        //    try
-        //    {
-        //    var db = new PRN231_SUContext(); 
-        //    var news = (from n in db.News
-        //               orderby n.CreateDate descending
-        //               select n).Take(1);
-        //    return news;
-        //    }catch(Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-
-
-        //}
+        
         public News newsFirst()
         {
             try
@@ -287,8 +216,10 @@ namespace Project_PRN231.DataAccess
             }
         }
 
-        public IEnumerable<NewsDTO> GetNewsUserSeen(int userId, int cateId)
+        public IEnumerable<NewsDTO> GetNewsUserSeen(string email, int cateId)
         {
+            var db1 = new PRN231_SUContext();
+            var user = db1.Users.FirstOrDefault(x => x.Email == email);
             List<NewsDTO> list = new List<NewsDTO>();
             try
             {
@@ -296,7 +227,7 @@ namespace Project_PRN231.DataAccess
                 {
                     list = (from n in db.News
                             join ns in db.NewsSeens on n.Id equals ns.NewsId
-                            where ns.UserId == userId && ns.CateId == cateId
+                            where ns.UserId == user.Id && ns.CateId == cateId
                             select new NewsDTO
                             {
                                 Id = n.Id,
