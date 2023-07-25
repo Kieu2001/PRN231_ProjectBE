@@ -104,7 +104,8 @@ namespace Project_PRN231.DataAccess
                 if (rp != null)
                 {
                     var db = new PRN231_SUContext();
-                    db.Genres.Remove(genre);
+                    rp.IsDeleted = true;
+                    db.Entry<Genre>(rp).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     db.SaveChanges();
                 }
                 else

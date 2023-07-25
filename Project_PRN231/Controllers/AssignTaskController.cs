@@ -87,7 +87,7 @@ namespace Project_PRN231.Controllers
         [HttpGet]
         public IActionResult GetAssignTaskByReporterId(int reportId)
         {
-            var lstAssignForRepoter = db.AssignTasks.Where(x => x.ReporterId == reportId && (x.IsWriterAccept == false || x.IsWriterAccept == null)).ToList();
+            var lstAssignForRepoter = db.AssignTasks.Where(x => x.ReporterId == reportId && (x.IsReportAccept == false || x.IsReportAccept == null) && x.IsDeleted == false ).ToList();
             if (lstAssignForRepoter.Count == 0) 
             {
                 return NotFound();  
@@ -126,7 +126,7 @@ namespace Project_PRN231.Controllers
         [HttpGet]
         public IActionResult GetAllAssignTaskByWriterId(int writerId)
         {
-            var lstAssignForWriter = db.AssignTasks.Where(x => x.WriterId == writerId && (x.IsWriterAccept == false || x.IsWriterAccept == null)).ToList();
+            var lstAssignForWriter = db.AssignTasks.Where(x => x.WriterId == writerId && (x.IsWriterAccept == false || x.IsWriterAccept == null) && x.IsDeleted == false).ToList();
             if (lstAssignForWriter.Count == 0)
             {
                 return NotFound();

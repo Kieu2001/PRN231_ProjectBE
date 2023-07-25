@@ -10,6 +10,8 @@ using System.Net;
 using System.Reflection.Metadata;
 using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Project_PRN231.Controllers
 {
@@ -31,6 +33,9 @@ namespace Project_PRN231.Controllers
         }
 
         [HttpGet]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Leader")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Writing")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Reporter")]
         public IActionResult GetAllUser()
         {
             var lstUser = user.GetAllUser();
@@ -61,6 +66,35 @@ namespace Project_PRN231.Controllers
             }
             return Ok(user);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> GetUserByEmail(string email, string fullname)
+        {
+            if (email != null)
+            {
+                var use = await db.Users.FirstOrDefaultAsync(x => x.Email == email);
+                if (use == null)
+                {
+                    User a = new User
+                    {
+                        Email = email,
+                        FullName = fullname,
+                        CreateDate = DateTime.Now,
+                        RoleId = 2
+                    };
+                    db.Users.Add(a);
+                    await db.SaveChangesAsync();
+                    var id = await db.Users.OrderBy(x => x.Id).LastOrDefaultAsync();
+                    return new JsonResult(id.Id);
+
+                } 
+                return new JsonResult(use.Id);
+            }
+            return new JsonResult("");     
+        }
+
+
+
         [HttpGet]
         public IActionResult GetUserRole(int id)
         {
@@ -76,6 +110,18 @@ namespace Project_PRN231.Controllers
             } user.InsertUser(use);
            
             return Ok("Inserted Successfull!!!");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LoginByGoogleOrFaceBook(string email)
+        {
+            var use = await db.Users.FirstOrDefaultAsync(x => x.Email == email);
+            if (use == null)
+            {
+                
+                return Ok();
+            }
+            return Ok(use);
         }
 
         [HttpPost]

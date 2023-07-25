@@ -31,7 +31,7 @@ namespace Project_PRN231.Repositories
 
         public News newsFirst() => NewsManagement.Instance.newsFirst();
 
-        public IEnumerable<NewsDTO> GetNewsUserSeen(int userId,int cateId) => NewsManagement.Instance.GetNewsUserSeen(userId , cateId);
+        //public IEnumerable<NewsDTO> GetNewsUserSeen(string userId,int cateId) => NewsManagement.Instance.GetNewsUserSeen(userId , cateId);
 
         public void AddNewsSeen(NewsSeen newsSave) => NewsManagement.Instance.AddNewsSeen(newsSave);
 
@@ -50,6 +50,7 @@ namespace Project_PRN231.Repositories
         public int CountLike(int id) => NewsManagement.Instance.CountLike(id);
 
         public IEnumerable<News> GetNewsByName(string name) => NewsManagement.Instance.GetNewsByName(name);
-        
+
+        public IEnumerable<NewsDTO> GetNewsUserSeen(string userId, int cateId) => NewsManagement.Instance.GetNewsUserSeen(userId, cateId);
     }
 }

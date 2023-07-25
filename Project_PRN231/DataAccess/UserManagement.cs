@@ -56,6 +56,7 @@ namespace Project_PRN231.DataAccess
                                     Password = u.Password,
                                     Phone = u.Phone,
                                     Address = u.Address,
+                                    RoleId = u.RoleId,
                                     RoleName = r.RoleName,
                                     CreateDate = u.CreateDate,
                                 }).ToList();
