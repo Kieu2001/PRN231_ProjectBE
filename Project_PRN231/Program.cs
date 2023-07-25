@@ -34,6 +34,9 @@ builder.Services.AddScoped<IReporterRepository, ReporterRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
+builder.Services.AddScoped<INewsRepository, NewsRepository>();
+builder.Services.AddScoped<IAdvertisementRepository, AdvertisementRepository>();
+builder.Services.AddScoped<IAdvertisementOrderRepository, AdvertisementOrderRepository>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(option =>

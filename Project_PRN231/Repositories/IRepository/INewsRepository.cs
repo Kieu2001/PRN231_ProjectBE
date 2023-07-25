@@ -17,7 +17,7 @@ namespace Project_PRN231.Repositories.IRepository
         IEnumerable<Genre> GetAllGenres();
         IEnumerable<News> GetNewsByGenreId(int id);
         News newsFirst();
-        IEnumerable<NewsDTO> GetNewsUserSeen(int userId, int cateId);
+        IEnumerable<NewsDTO> GetNewsUserSeen(string userId, int cateId);
         void AddNewsSeen(NewsSeen newsSave);
         NewsSeen getNewsSeenById(int? userId, int? newsId);
         NewsSeen getNewsSeen(int? userId, int? newsId);

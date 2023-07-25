@@ -13,7 +13,7 @@ namespace EmailAPI.Controllers
         public IActionResult SendEmail([FromBody] EmailRequest request)
         {
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Team 5 - PRN231", "ngobacuong2211@gmail.com")); // Email nguồn
+            message.From.Add(new MailboxAddress("Team 9 - PRN231", "ngobacuong2211@gmail.com")); // Email nguồn
             message.To.Add(new MailboxAddress("", request.To)); // Email người nhận
             message.Subject = request.Subject; // Tiêu đề email
 
