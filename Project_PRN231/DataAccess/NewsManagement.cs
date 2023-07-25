@@ -271,7 +271,7 @@ namespace Project_PRN231.DataAccess
             try
             {
                 var db = new PRN231_SUContext();
-                var l = db.Comments.Include(i => i.User).Where(i => i.NewsId == id).ToList();
+                var l = db.Comments.Include(i => i.User).Where(i => i.NewsId == id && i.IsActive == true).ToList();
                 var user = db.Users.ToList();
                 foreach (var item in l)
                 {

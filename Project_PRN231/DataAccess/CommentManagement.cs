@@ -34,7 +34,7 @@ namespace Project_PRN231.DataAccess
                 list = (from c in db.Comments
                         join u in db.Users on c.UserId equals u.Id
                         join n in db.News on c.NewsId equals n.Id
-                        where c.IsActive == null
+                        where (c.IsActive == null || c.IsActive == false )
                         select new CommentDTO
                         {
                             Id = c.Id,
@@ -95,8 +95,7 @@ namespace Project_PRN231.DataAccess
                 Comment comment = GetCommentById(id);
                 if (comment != null)
                 {
-                    comment.IsActive = true; // Chuyển trạng thái isActive sang true
-
+                    comment.IsActive = true; 
                     var db = new PRN231_SUContext();
                     db.Entry<Comment>(comment).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     db.SaveChanges();

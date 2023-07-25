@@ -90,7 +90,7 @@ namespace Project_PRN231.Controllers
             var lstAssignForRepoter = db.AssignTasks.Where(x => x.ReporterId == reportId && (x.IsReportAccept == false || x.IsReportAccept == null) && x.IsDeleted == false ).ToList();
             if (lstAssignForRepoter.Count == 0) 
             {
-                return NotFound();  
+                return Ok(lstAssignForRepoter);  
             }
             foreach (var item in lstAssignForRepoter)
             {
@@ -129,7 +129,7 @@ namespace Project_PRN231.Controllers
             var lstAssignForWriter = db.AssignTasks.Where(x => x.WriterId == writerId && (x.IsWriterAccept == false || x.IsWriterAccept == null) && x.IsDeleted == false).ToList();
             if (lstAssignForWriter.Count == 0)
             {
-                return NotFound();
+                return Ok(lstAssignForWriter);
             }
             foreach (var item in lstAssignForWriter)
             {
@@ -249,7 +249,7 @@ namespace Project_PRN231.Controllers
                 return NotFound();
             } 
             assignTask.UpdateAssignTask(asTask);
-            return Ok("Update Successfull!!!");
+            return new JsonResult("Update Successfull!!!");
         }
 
         [HttpPut]

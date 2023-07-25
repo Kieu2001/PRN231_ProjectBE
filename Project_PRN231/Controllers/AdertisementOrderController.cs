@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Project_PRN231.DataAccess;
 using Project_PRN231.Models;
 using Project_PRN231.Repositories.IRepository;
@@ -13,11 +14,13 @@ namespace Project_PRN231.Controllers
 
         private readonly IAdvertisementOrderRepository AdOrder;
         private readonly IMapper _mapper;
+        private readonly PRN231_SUContext db;
 
-        public AdertisementOrderController(IAdvertisementOrderRepository trackRepository, IMapper mapper)
+        public AdertisementOrderController(IAdvertisementOrderRepository trackRepository, IMapper mapper, PRN231_SUContext db)
         {
             AdOrder = trackRepository;
             _mapper = mapper;
+            this.db = db;
         }
         [HttpGet]
         public IActionResult GetAdertisementOrderById(int id)
@@ -25,7 +28,61 @@ namespace Project_PRN231.Controllers
             return Ok(AdOrder.GetAdvertisementOrderById(id));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> AdvertisRandom()
+        {
+            var order = await db.AdvertisementOrders.Where(x => x.IsPending == false && x.IsApprove == true).ToListAsync();
+            Random random = new Random();
+            int randomNumber = random.Next(1, 11);
+            if (randomNumber <= 7)
+            {
+                foreach (var item in order)
+                {
+                    if (item.AdvertisementId == 2)
+                    {
+                        return Ok(item);
+                    }
+                }
+            } else
+            {
+                foreach (var item in order)
+                {
+                    if (item.AdvertisementId == 1)
+                    {
+                        return Ok(item);
+                    }
+                }
+            }
 
+            return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrderAdvertisAccept()
+        {
+            var listOrder = await db.AdvertisementOrders.Where(x => x.IsPending == false && x.IsApprove == true).ToListAsync();
+            foreach (var order in listOrder) 
+            {
+                foreach (var item in db.Advertisements.ToList())
+                {
+                    if (item.Id == order.AdvertisementId)
+                    {
+                        order.Advertisement = item;
+                        break;
+                    }
+                }
+
+                foreach (var item in db.Users.ToList())
+                {
+                    if (item.Id == order.UserId)
+                    {
+                        order.User = item;
+                        break;
+                    }
+                }
+            }
+            return Ok(listOrder);
+        }
 
         [HttpGet]
         public IActionResult GetAdertisementOrderByApprove()

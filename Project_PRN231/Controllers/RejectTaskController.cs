@@ -36,6 +36,13 @@ namespace Project_PRN231.Controllers
                         item.Reject = k;    
                     }
                 }
+                //foreach (var it in db.Users.ToList())
+                //{
+                //    if (item.UserId == it.Id)
+                //    {
+                //        item.User = it;
+                //    }
+                //}
             }
             return Ok(listRejectTask);
         }
@@ -59,6 +66,14 @@ namespace Project_PRN231.Controllers
                         break;
                     }
                 }
+
+                //foreach (var it in db.Users.ToList())
+                //{
+                //    if (item.UserId == it.Id)
+                //    {
+                //        item.User = it;
+                //    }
+                //}
             }
             return Ok(listPending);
         }
