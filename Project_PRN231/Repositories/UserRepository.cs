@@ -11,6 +11,9 @@ namespace Project_PRN231.Repositories
 
         public IEnumerable<UserDTO> GetAllUser() => UserManagement.Instance.GetUserList();
 
+        public User GetUserByEmail(string email) => UserManagement.Instance.GetUserByEmail(email);
+       
+
         public User GetUserById(int Id) => UserManagement.Instance.GetUserById(Id);
 
         public int GetUserData(int numberOfDays) => UserManagement.Instance.GetUserData(numberOfDays);

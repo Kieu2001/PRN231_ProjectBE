@@ -7,6 +7,7 @@ namespace Project_PRN231.Repositories.IRepository
     {
         IEnumerable<DTO.UserDTO> GetAllUser();
         User GetUserById(int Id);
+        User GetUserByEmail(string email);
         void InsertUser(User user);
         void UpdateUser(User user);
         void DeleteUser(User user);
