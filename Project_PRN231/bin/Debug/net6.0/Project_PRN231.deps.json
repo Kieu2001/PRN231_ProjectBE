@@ -16,6 +16,7 @@
           "Microsoft.EntityFrameworkCore.Design": "6.0.16",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.16",
           "Microsoft.Extensions.Configuration.Json": "6.0.0",
+          "MimeKit": "4.1.0",
           "Swashbuckle.AspNetCore": "6.2.3"
         },
         "runtime": {
