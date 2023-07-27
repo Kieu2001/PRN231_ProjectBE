@@ -31,7 +31,7 @@ namespace Project_PRN231.Controllers
         [HttpGet]
         public async Task<IActionResult> AdvertisRandom()
         {
-            var order = await db.AdvertisementOrders.Where(x => x.IsPending == false && x.IsApprove == true).ToListAsync();
+            var order = await db.AdvertisementOrders.Where(x => x.IsPending == true && x.IsApprove == true && (x.IsDelete == false || x.IsDelete == null)).ToListAsync();
             Random random = new Random();
             int randomNumber = random.Next(1, 11);
             if (randomNumber <= 7)
@@ -60,7 +60,7 @@ namespace Project_PRN231.Controllers
         [HttpGet]
         public async Task<IActionResult> GetOrderAdvertisAccept()
         {
-            var listOrder = await db.AdvertisementOrders.Where(x => x.IsPending == false && x.IsApprove == true).ToListAsync();
+            var listOrder = await db.AdvertisementOrders.Where(x => x.IsPending == true && x.IsApprove == true && (x.IsDelete == false || x.IsDelete == null)).ToListAsync();
             foreach (var order in listOrder) 
             {
                 foreach (var item in db.Advertisements.ToList())
@@ -144,6 +144,16 @@ namespace Project_PRN231.Controllers
             {
                 return StatusCode(500, ex.Message);
             }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> CheckDeadLine(int taskId)
+        {
+            var order = await db.AdvertisementOrders.FirstOrDefaultAsync(x => x.Id == taskId);
+            order.IsDelete = true;
+            db.Entry<AdvertisementOrder>(order).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+            return new JsonResult("");
         }
 
 

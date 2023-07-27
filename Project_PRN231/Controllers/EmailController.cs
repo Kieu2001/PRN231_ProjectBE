@@ -24,11 +24,20 @@ namespace EmailAPI.Controllers
 
             using (var client = new SmtpClient())
             {
-                client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls); // SMTP server và port (ở đây sử dụng Gmail)
-                client.Authenticate("ngobacuong2211@gmail.com", "utegedatcyktwyuj"); // Email nguồn và mật khẩu
+                try
+                {
+                    client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls); // SMTP server và port (ở đây sử dụng Gmail)
+                    client.Authenticate("ngobacuong2211@gmail.com", "utegedatcyktwyuj"); // Email nguồn và mật khẩu
 
-                client.Send(message);
-                client.Disconnect(true);
+                    client.Send(message);
+                    client.Disconnect(true);
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+
             }
 
             return Ok("Email sent successfully");
